@@ -1,9 +1,12 @@
 package com.oopProj.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +21,9 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
-    private Long projectId;
+    private Integer projectId;
+    @NotBlank(message = "Pole nazwa nie może być puste!")
+    @Size(min = 3, max = 50, message = "Nazwa musi zawierać od {min} do {max} znaków!")
     @Column(nullable = false, length = 50)
     private String name;
     @Column(length = 1000)
@@ -27,18 +32,19 @@ public class Project {
     private LocalDateTime creationDate;
     @Column(name = "return_date", nullable = false)
     private LocalDate returnData;
-    @OneToMany(mappedBy = "project_id")
+    @OneToMany(mappedBy = "project")
+    @JsonIgnoreProperties({"project"})
     private List<Task> tasks;
     @ManyToMany
-    @JoinTable(name = "project_student", joinColumns = {@JoinColumn(name="project_id")},
-    inverseJoinColumns = {@JoinColumn(name="student_id")})
+    @JoinTable(name = "project_student", joinColumns = {@JoinColumn(name = "project_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<Student> students;
 
-    public Long getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 

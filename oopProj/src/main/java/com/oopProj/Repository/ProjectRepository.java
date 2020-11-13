@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
@@ -14,7 +13,4 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
         List<Project> findByNameContainingIgnoreCase(String name);
 
-        void deleteById(Long projectId);
-
-        Optional<Project> findById(Long projectId);
 }

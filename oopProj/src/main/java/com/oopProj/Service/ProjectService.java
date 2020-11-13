@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface ProjectService {
 
-    Optional<Project> getProject(Long projectId);
+    Optional<Project> getProject(Integer projectId);
     Project setProject(Project project);
-    void deleteProject(Long projectId);
+    void deleteProject(Integer projectId);
     Page<Project> getProjects(Pageable pageable);
     Page<Project> searchByName(String name, Pageable pageable);
 }

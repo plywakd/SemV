@@ -49,4 +49,5 @@ public class Supply {
     @Override
     public String toString() {
         return getItem()+","+getQuantity()+","+getSupplyDate()+","+getUnitPrice();}
+
 }

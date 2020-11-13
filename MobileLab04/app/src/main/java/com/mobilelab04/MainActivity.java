@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         task02 = (Button) findViewById(R.id.dispatch2);
         task03 = (Button) findViewById(R.id.dispatch3);
 
-        task01Intent = new Intent(MainActivity.this, Task01Activity.class);
+        task01Intent = new Intent(MainActivity.this, MyCanvas01.class);
         task02Intent = new Intent(MainActivity.this, Task02Activity.class);
-        task02Intent = new Intent(MainActivity.this, Task03Activity.class);
+        task03Intent = new Intent(MainActivity.this, Task03Activity.class);
 
         task01.setOnClickListener((click) -> {
             MainActivity.this.startActivity(task01Intent);

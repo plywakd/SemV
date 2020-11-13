@@ -1,15 +1,14 @@
 package com;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.summingDouble;
 
 public class Main {
 
@@ -40,23 +39,37 @@ public class Main {
         System.out.println(collects);
 
 
-        collects.stream()
-                .forEach(c ->
-                        supplies.stream()
-                                .filter(s -> s.getItem().equals(c.getItem()))
-                                .filter(s -> s.getQuantity() > 0)
-                                .sorted(Comparator.comparing(s -> s.getSupplyDate())).forEach(s -> {
-                            if (s.getQuantity() < c.getQuantity()) {
-                                double q = s.getQuantity();
-                                s.setQuantity(0.0);
-                                c.setQuantity(c.getQuantity() - q);
-                            } else {
-                                s.setQuantity(s.getQuantity() - c.getQuantity());
-                                c.setQuantity(0.0);
-                            }
-                        }));
+//        collects
+//                .forEach(c ->
+//                        supplies.stream()
+//                                .filter(s -> s.getItem().equals(c.getItem()))
+//                                .filter(s -> s.getQuantity() > 0)
+//                                .sorted(Comparator.comparing(s -> s.getSupplyDate())).forEach(s -> {
+//                            if (s.getQuantity() < c.getQuantity()) {
+//                                double q = s.getQuantity();
+//                                s.setQuantity(0.0);
+//                                c.setQuantity(c.getQuantity() - q);
+//                            } else {
+//                                s.setQuantity(s.getQuantity() - c.getQuantity());
+//                                c.setQuantity(0.0);
+//                            }
+//                        }));
+//
+//        System.out.println(supplies);
+//        System.out.println(sortedSupplies(supplies));
 
-        System.out.println(supplies);
-        System.out.println(sortedSupplies(supplies));
+        // stream only functional
+//        Map<String , Double> groupedCollects = collects.stream().collect(groupingBy(CollectSupply::getItem,summingDouble(CollectSupply::getQuantity)));
+//
+//        System.out.println(groupedCollects);
+// Dunno what else to do with that
+//        groupedCollects.forEach((str,val) ->
+//                supplies.stream().filter(s->s.getItem().equals(str)).sorted(Comparator.comparing(s -> s.getSupplyDate())));
+//                supplies.stream()
+//                        .sorted(Comparator.comparing(s -> s.getSupplyDate()))
+//                        .filter(s-> s.getItem().equals(str))
+//                        .forEach(s->));
+
+
     }
 }

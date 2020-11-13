@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 
     @Override
-    public Optional<Project> getProject(Long projectId) {
+    public Optional<Project> getProject(Integer projectId) {
         return projectRepo.findById(projectId);
     }
 
@@ -37,7 +37,7 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     @Transactional
-    public void deleteProject(Long projectId) {
+    public void deleteProject(Integer projectId) {
         for( Task task : taskRepo.findTasksForProject(projectId)){
             taskRepo.delete(task);
         }
