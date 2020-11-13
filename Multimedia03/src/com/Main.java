@@ -30,9 +30,7 @@ public class Main {
         }
 
         if (isRead){
-            System.out.println("Res:"+(usign_bytes[1] & 0x24));
-            System.out.println("Res 2 :"+(usign_bytes[1] & 0x12));
-            switch(usign_bytes[1] & 0x24){
+            switch(usign_bytes[1] & 0x18){
                 case 0:
                     System.out.println("MPEG Ver. 2.5");
                     break;
@@ -46,7 +44,7 @@ public class Main {
                     System.out.println("MPEG Ver. 1");
                     break;
             }
-            switch(usign_bytes[1] & 0x12){
+            switch(usign_bytes[1] & 0x06){
                 case 0:
                     System.out.println("Reserved");
                     break;
@@ -61,6 +59,14 @@ public class Main {
                     break;
             }
             switch(usign_bytes[1] & 0x01){
+                case 0:
+                    System.out.println("Protected by CRC");
+                    break;
+                case 1:
+                    System.out.println("Not protected");
+                    break;
+            }
+            switch(usign_bytes[2] & 0x01){
                 case 0:
                     System.out.println("Protected by CRC");
                     break;
