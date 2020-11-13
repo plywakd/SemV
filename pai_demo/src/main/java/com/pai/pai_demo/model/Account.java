@@ -1,9 +1,10 @@
-package com.pai.models;
+package com.pai.pai_demo.model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,29 +13,33 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="accounts")
+@Table(name = "accounts")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private int accountId;
     private String name;
-    private String lastname;
-    @Column(name = "email", unique = true)
+    private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
-    @Column(name = "register_time")
-    private LocalDateTime registrationDateTime = LocalDateTime.now();
+    @Column(name = "registration_time")
+    private LocalDateTime registrationDateTime;
+    @Type(type = "text")
     private String description;
-    @Column(name = "status")
     private boolean status;
 
-    public Account(String name, String lastname, String email, String password, LocalDateTime registrationDateTime, String description, boolean status) {
+    public Account(String name, String lastName, String email, String password, LocalDateTime registrationDateTime, String description, boolean status) {
         this.name = name;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.registrationDateTime = registrationDateTime;
         this.description = description;
+        this.status = status;
+    }
+
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }
