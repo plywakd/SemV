@@ -24,7 +24,7 @@ public class ProjectRestController {
         this.projectService = projectService;
     }
 
-    @GetMapping("projects/{project_id}")
+    @GetMapping("projects/{projectId}")
     ResponseEntity<Project> getProject(@PathVariable Integer projectId) {
         return ResponseEntity.of(projectService.getProject(projectId));
     }
@@ -44,14 +44,22 @@ public class ProjectRestController {
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/projects/{projectId}")
+    public ResponseEntity<Void> deleteProject(@PathVariable Integer projectId) {
+        return projectService.getProject(projectId).map(p -> {
+            projectService.deleteProject(projectId);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping(value = "/projects")
     Page<Project> getProjects(Pageable pageable) {
         return projectService.getProjects(pageable);
     }
 
     @GetMapping(value = "/projects", params = "name")
-    Page<Project> getProjectByName(@RequestParam String name, Pageable pageable){
-            return projectService.searchByName(name,pageable);
+    Page<Project> getProjectByName(@RequestParam String name, Pageable pageable) {
+        return projectService.searchByName(name, pageable);
     }
 
 }
