@@ -22,7 +22,8 @@ import java.util.Random;
 
 public class MyCanvas01 extends View {
 
-    public static List<Integer> ColorsList = Arrays.asList(Color.BLUE, Color.RED, Color.GREEN, Color.GRAY, Color.YELLOW, Color.BLACK, Color.WHITE, Color.CYAN, Color.MAGENTA);
+    public static List<Integer> ColorsList = Arrays.asList(Color.BLUE, Color.RED, Color.GREEN, Color.GRAY,
+            Color.YELLOW, Color.BLACK, Color.WHITE, Color.CYAN, Color.MAGENTA);
     public int rand;
     public int randX;
     public int randY;
@@ -51,11 +52,7 @@ public class MyCanvas01 extends View {
                 randX = new Random().nextInt(width);
                 randY = new Random().nextInt(height);
                 trianglePoints.add(new Point(randX, randY));
-                if (j == 2) {
-                    if (!checkIfTriangle(trianglePoints.get(0), trianglePoints.get(1), trianglePoints.get(2))) {
-                        j = 0;
-                    }
-                }
+                if (j == 2) if (!checkIfTriangle(trianglePoints.get(0), trianglePoints.get(1), trianglePoints.get(2)))j = 0;
             }
             int colorFill = ColorsList.get(rand);
             drawTriangle(canvas, trianglePoints.get(0), trianglePoints.get(1), trianglePoints.get(2), colorFill);

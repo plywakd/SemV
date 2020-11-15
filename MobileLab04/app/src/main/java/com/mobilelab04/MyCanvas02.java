@@ -42,7 +42,11 @@ public class MyCanvas02 extends View {
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(2);
         for (int i = 0; i < 10; i++) {
-            canvas.drawLine(i * width / 10, 0, i * width / 10 + ((i * width / 10) / 2), (height / 5) - 10, paint);
+            int startX = i * width / 10;
+            int startY = 0;
+            int stopX = i * width / 10 + ((i * width / 10) / 2);
+            int stopY = (height / 5) - 10;
+            canvas.drawLine(startX,startY,stopX,stopY, paint);
         }
     }
 
