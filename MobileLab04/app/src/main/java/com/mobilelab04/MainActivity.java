@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         task02 = (Button) findViewById(R.id.dispatch2);
         task03 = (Button) findViewById(R.id.dispatch3);
 
-        task01Intent = new Intent(MainActivity.this, MyCanvas01.class);
+        task01Intent = new Intent(MainActivity.this, Task01Activity.class);
         task02Intent = new Intent(MainActivity.this, Task02Activity.class);
         task03Intent = new Intent(MainActivity.this, Task03Activity.class);
 
@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         });
         task02.setOnClickListener((click) -> {
             MainActivity.this.startActivity(task02Intent);
+        });
+        task03.setOnClickListener((click) -> {
+            MainActivity.this.startActivity(task03Intent);
         });
     }
 }

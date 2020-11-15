@@ -5,10 +5,15 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Task03Activity extends AppCompatActivity {
-    
+
+    private MyCanvas03 myCanvas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.task03);
+
+        myCanvas = new MyCanvas03(this);
+
+        setContentView(myCanvas);
     }
 }
