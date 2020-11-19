@@ -17,12 +17,12 @@ public class MenuScript : MonoBehaviour
         
     }
 
-    void PlayGame()
+    public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene("Game");
     }
 
-    void QuitGame()
+    public void QuitGame()
     {
         Debug.Log("Application is shutting down");
         Application.Quit();
