@@ -54,9 +54,12 @@ public class Task01Activity extends AppCompatActivity {
 
 
         check.setOnClickListener((click) -> {
-            if (!letters.getText().toString().equals("WYGRANA!") ||
-                    !letters.getText().toString().equals("PRZEGRANA!"))
+            if (chances > 1)
                 checkLetter();
+            else {
+                letters.setText("PRZEGRANA!");
+                toGuess.setText(wordToGuess);
+            }
         });
 
         nextWord.setOnClickListener((click) -> {
@@ -97,14 +100,10 @@ public class Task01Activity extends AppCompatActivity {
             toGuess.setText(String.valueOf(wordToGuessSecret));
             letters.setText(letters.getText().toString() + letterInput);
             if (wordToGuess.equals(toGuess.getText().toString())) letters.setText("WYGRANA!");
-        } else if (chances <= 0) {
-            setGameImage();
-            letters.setText("PRZEGRANA!");
-            toGuess.setText(wordToGuess);
         } else {
             chances--;
-            setGameImage();
             letters.setText(letters.getText().toString() + letterInput);
+            setGameImage();
         }
         letter.setText("");
     }
