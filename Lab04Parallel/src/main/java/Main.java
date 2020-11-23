@@ -11,6 +11,14 @@ import java.util.regex.Pattern;
 
 public class Main {
 
+    public static String randomWikipedia = "https://en.wikipedia.org/wiki/Special:Random";
+    public static String toFindWikipedia = "https://en.wikipedia.org/wiki/Poland";
+    //\/wiki\/(.*\w)
+    public static String wikiHrefToFind = "wiki/Andrzej";
+    public static String httpHeader = "https://en.wikipedia.org/";
+    public static String foundLink = "";
+    public static List<String> newHrefs;
+
     public static String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);
@@ -28,7 +36,7 @@ public class Main {
     public static List<String> getHrefs(String randomWikiPage) throws Exception {
         String getHTMLResult = getHTML(randomWikiPage);
         //pattern to find groups of <a> tag where group 0 is whole, group 1 is first " sign and group 2 is href value
-        Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1");
+        Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])\\/(.*?)\\1");
         Matcher m = p.matcher(getHTMLResult);
         List<String> matches = new ArrayList<>();
         while(m.find()){
@@ -37,20 +45,34 @@ public class Main {
         return matches;
     }
 
+    public static void lookHref(List<String> hrefs) throws Exception {
+        foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
+        if(foundLink.equals("")) {
+            for (String href : hrefs) {
+                if (!href.contains(".")) {
+                    newHrefs = getHrefs(httpHeader + href);
+                    System.out.println("Sublinks " + newHrefs.toString());
+                    foundLink = newHrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
+                    if (!foundLink.equals("")) break;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) throws Exception
     {
-        String randomWikipedia = "https://en.wikipedia.org/wiki/Special:Random";
-        String toFindWikipedia = "https://en.wikipedia.org/wiki/Poland";
-        String wikiHrefToFind = "/wiki/Poland";
-
-        String parsed = "";
-        while(parsed.equals("")){
-            List<String> matches = getHrefs(randomWikipedia);
-            System.out.println("Matches " + matches.toString());
-            parsed = matches.stream().filter(matched->matched.equals(wikiHrefToFind)).findFirst().orElse("");
-            System.out.println("Check stream "+parsed);
+        int levels = 0;
+        List<String> hrefs = getHrefs(randomWikipedia);
+        System.out.println("Links on wiki " + hrefs.toString());
+        while(foundLink.equals("")){
+            System.out.println("LEVEL: "+ levels);
+            lookHref(hrefs);
+            levels++;
+            hrefs=newHrefs;
         }
-        System.out.println("FOUND HREF: "+ parsed);
+        System.out.println("Check stream "+ foundLink);
+        System.out.println("FOUND HREF: "+ foundLink+" levels:"+levels);
+
 
 
     }
