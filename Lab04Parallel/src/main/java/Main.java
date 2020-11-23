@@ -14,10 +14,11 @@ public class Main {
     public static String randomWikipedia = "https://en.wikipedia.org/wiki/Special:Random";
     public static String toFindWikipedia = "https://en.wikipedia.org/wiki/Poland";
     //\/wiki\/(.*\w)
-    public static String wikiHrefToFind = "wiki/Poland";
-    public static String httpHeader = "https://en.wikipedia.org/";
+    public static String wikiHrefToFind = "/Andrzej";
+    public static String httpHeader = "https://en.wikipedia.org/wiki";
     public static String foundLink = "";
     public static List<String> newHrefs;
+    public static List<String> subHrefs = new ArrayList<>();
 
     public static String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
@@ -36,7 +37,7 @@ public class Main {
     public static List<String> getHrefs(String randomWikiPage) throws Exception {
         String getHTMLResult = getHTML(randomWikiPage);
         //pattern to find groups of <a> tag where group 0 is whole, group 1 is first " sign and group 2 is href value
-        Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])\\/(.*?)\\1");
+        Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])\\/wiki(.*?)\\1");
         Matcher m = p.matcher(getHTMLResult);
         List<String> matches = new ArrayList<>();
         while(m.find()){
@@ -49,8 +50,9 @@ public class Main {
         foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
         if(foundLink.equals("")) {
             for (String href : hrefs) {
-                if (!href.contains(".") || !href.contains("Wikipedia") || !href.contains("&")) {
+                if (!href.contains(".") && !href.contains(":") && !href.contains("&")) {
                     newHrefs = getHrefs(httpHeader + href);
+                    subHrefs.addAll(newHrefs);
                     System.out.println("Sublinks " + newHrefs.toString());
                     foundLink = newHrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
                     if (!foundLink.equals("")) break;
@@ -68,7 +70,7 @@ public class Main {
             System.out.println("LEVEL: "+ levels);
             lookHref(hrefs);
             levels++;
-            hrefs=newHrefs;
+            hrefs=new ArrayList<>(subHrefs);
         }
         System.out.println("Check stream "+ foundLink);
         System.out.println("FOUND HREF: "+ foundLink+" levels:"+levels);
