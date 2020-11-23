@@ -14,7 +14,7 @@ public class Main {
     public static String randomWikipedia = "https://en.wikipedia.org/wiki/Special:Random";
     public static String toFindWikipedia = "https://en.wikipedia.org/wiki/Poland";
     //\/wiki\/(.*\w)
-    public static String wikiHrefToFind = "wiki/Andrzej";
+    public static String wikiHrefToFind = "wiki/Poland";
     public static String httpHeader = "https://en.wikipedia.org/";
     public static String foundLink = "";
     public static List<String> newHrefs;
@@ -49,7 +49,7 @@ public class Main {
         foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
         if(foundLink.equals("")) {
             for (String href : hrefs) {
-                if (!href.contains(".")) {
+                if (!href.contains(".") || !href.contains("Wikipedia") || !href.contains("&")) {
                     newHrefs = getHrefs(httpHeader + href);
                     System.out.println("Sublinks " + newHrefs.toString());
                     foundLink = newHrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
