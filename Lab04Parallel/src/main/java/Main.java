@@ -40,7 +40,7 @@ public class Main {
         Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])\\/wiki(.*?)\\1");
         Matcher m = p.matcher(getHTMLResult);
         List<String> matches = new ArrayList<>();
-        while(m.find()){
+        while (m.find()) {
             matches.add(m.group(2));
         }
         return matches;
@@ -48,7 +48,7 @@ public class Main {
 
     public static void lookHref(List<String> hrefs) throws Exception {
         foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
-        if(foundLink.equals("")) {
+        if (foundLink.equals("")) {
             for (String href : hrefs) {
                 if (!href.contains(".") && !href.contains(":") && !href.contains("&")) {
                     newHrefs = getHrefs(httpHeader + href);
@@ -61,20 +61,18 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         int levels = 0;
         List<String> hrefs = getHrefs(randomWikipedia);
         System.out.println("Links on wiki " + hrefs.toString());
-        while(foundLink.equals("")){
-            System.out.println("LEVEL: "+ levels);
+        while (foundLink.equals("")) {
+            System.out.println("LEVEL: " + levels);
             lookHref(hrefs);
             levels++;
-            hrefs=new ArrayList<>(subHrefs);
+            hrefs = new ArrayList<>(subHrefs);
         }
-        System.out.println("Check stream "+ foundLink);
-        System.out.println("FOUND HREF: "+ foundLink+" levels:"+levels);
-
+        System.out.println("Check stream " + foundLink);
+        System.out.println("FOUND HREF: " + foundLink + " levels:" + levels);
 
 
     }
