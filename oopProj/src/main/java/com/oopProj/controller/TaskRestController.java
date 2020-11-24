@@ -1,9 +1,7 @@
-package com.oopProj.Controller;
+package com.oopProj.controller;
 
-import com.oopProj.Models.Project;
-import com.oopProj.Models.Task;
-import com.oopProj.Service.ProjectService;
-import com.oopProj.Service.TaskService;
+import com.oopProj.models.Task;
+import com.oopProj.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

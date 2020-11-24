@@ -1,4 +1,4 @@
-package com.oopProj.Controller;
+package com.oopProj.controller;
 
 public class StudentRestController {
 }

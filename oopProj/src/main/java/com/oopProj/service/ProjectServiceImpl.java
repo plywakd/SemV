@@ -1,9 +1,9 @@
-package com.oopProj.Service;
+package com.oopProj.service;
 
-import com.oopProj.Models.Project;
-import com.oopProj.Models.Task;
-import com.oopProj.Repository.ProjectRepository;
-import com.oopProj.Repository.TaskRepository;
+import com.oopProj.models.Project;
+import com.oopProj.models.Task;
+import com.oopProj.repository.ProjectRepository;
+import com.oopProj.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

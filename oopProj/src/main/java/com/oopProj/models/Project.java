@@ -1,4 +1,4 @@
-package com.oopProj.Models;
+package com.oopProj.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -39,6 +39,14 @@ public class Project {
     @JoinTable(name = "project_student", joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<Student> students;
+
+    public Project(Integer projectId, String name, String description, LocalDateTime creationDate, LocalDate returnDate) {
+        this.projectId = projectId;
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.returnDate = returnDate;
+    }
 
     public Project(String name, String description, LocalDateTime creationDate) {
         this.name = name;

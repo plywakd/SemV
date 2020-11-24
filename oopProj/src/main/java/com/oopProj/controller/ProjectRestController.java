@@ -1,7 +1,7 @@
-package com.oopProj.Controller;
+package com.oopProj.controller;
 
-import com.oopProj.Models.Project;
-import com.oopProj.Service.ProjectService;
+import com.oopProj.models.Project;
+import com.oopProj.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

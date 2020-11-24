@@ -1,4 +1,4 @@
-package com.oopProj.Models;
+package com.oopProj.models;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

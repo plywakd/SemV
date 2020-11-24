@@ -1,6 +1,6 @@
-package com.oopProj.Repository;
+package com.oopProj.repository;
 
-import com.oopProj.Models.Task;
+import com.oopProj.models.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
