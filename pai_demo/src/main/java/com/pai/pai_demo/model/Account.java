@@ -4,10 +4,12 @@ package com.pai.pai_demo.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -28,6 +30,9 @@ public class Account {
     @Type(type = "text")
     private String description;
     private boolean status;
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Set<Role> roles;
 
     public Account(String name, String lastName, String email, String password, LocalDateTime registrationDateTime, String description, boolean status) {
         this.name = name;
