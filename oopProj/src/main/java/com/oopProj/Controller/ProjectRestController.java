@@ -4,6 +4,7 @@ import com.oopProj.Models.Project;
 import com.oopProj.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -55,6 +57,11 @@ public class ProjectRestController {
     @GetMapping(value = "/projects")
     Page<Project> getProjects(Pageable pageable) {
         return projectService.getProjects(pageable);
+    }
+
+    @GetMapping(value = "/projects_list")
+    List<Project> getProjects() {
+        return projectService.getProjects(PageRequest.of(0,20)).getContent();
     }
 
     @GetMapping(value = "/projects", params = "name")

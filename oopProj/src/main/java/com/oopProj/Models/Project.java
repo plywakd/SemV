@@ -31,7 +31,7 @@ public class Project {
     @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDateTime creationDate;
     @Column(name = "return_date", nullable = false)
-    private LocalDate returnData;
+    private LocalDate returnDate;
     @OneToMany(mappedBy = "project")
     @JsonIgnoreProperties({"project"})
     private List<Task> tasks;
@@ -39,6 +39,13 @@ public class Project {
     @JoinTable(name = "project_student", joinColumns = {@JoinColumn(name = "project_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<Student> students;
+
+    public Project(String name, String description, LocalDateTime creationDate) {
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.returnDate = LocalDate.now();
+    }
 
     public Integer getProjectId() {
         return projectId;
@@ -72,12 +79,12 @@ public class Project {
         this.creationDate = creationDate;
     }
 
-    public LocalDate getReturnData() {
-        return returnData;
+    public LocalDate getReturnDate() {
+        return returnDate;
     }
 
-    public void setReturnData(LocalDate returnData) {
-        this.returnData = returnData;
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 
     public List<Task> getTasks() {
@@ -94,5 +101,18 @@ public class Project {
 
     public void setStudents(Set<Student> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectId=" + projectId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creationDate=" + creationDate +
+                ", returnDate=" + returnDate +
+                ", tasks=" + tasks +
+                ", students=" + students +
+                '}';
     }
 }

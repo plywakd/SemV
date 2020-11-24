@@ -13,13 +13,13 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl implements ProjectService {
 
     private ProjectRepository projectRepo;
     private TaskRepository taskRepo;
 
     @Autowired
-    public ProjectServiceImpl(ProjectRepository projectRepo, TaskRepository taskRepo){
+    public ProjectServiceImpl(ProjectRepository projectRepo, TaskRepository taskRepo) {
         this.projectRepo = projectRepo;
         this.taskRepo = taskRepo;
     }
@@ -32,13 +32,14 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     public Project setProject(Project project) {
-        return null;
+        Project saved = new Project(project.getName(),project.getDescription(),project.getCreationDate());
+        return projectRepo.save(saved);
     }
 
     @Override
     @Transactional
     public void deleteProject(Integer projectId) {
-        for( Task task : taskRepo.findTasksForProject(projectId)){
+        for (Task task : taskRepo.findTasksForProject(projectId)) {
             taskRepo.delete(task);
         }
         projectRepo.deleteById(projectId);
@@ -46,11 +47,11 @@ public class ProjectServiceImpl implements ProjectService{
 
     @Override
     public Page<Project> getProjects(Pageable pageable) {
-        return null;
+        return projectRepo.findAll(pageable);
     }
 
     @Override
     public Page<Project> searchByName(String name, Pageable pageable) {
-        return null;
+        return projectRepo.findByNameContainingIgnoreCase(name, pageable);
     }
 }

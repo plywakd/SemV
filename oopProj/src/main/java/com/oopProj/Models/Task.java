@@ -75,4 +75,16 @@ public class Task {
     public void setAddedDate(LocalDateTime addedDate) {
         this.addedDate = addedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId=" + taskId +
+                ", project=" + project +
+                ", name='" + name + '\'' +
+                ", taskOrder=" + taskOrder +
+                ", description='" + description + '\'' +
+                ", addedDate=" + addedDate +
+                '}';
+    }
 }

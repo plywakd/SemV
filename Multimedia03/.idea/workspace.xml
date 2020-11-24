@@ -19,7 +19,54 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05739269-1540-4e89-8aeb-e7794ac98ba3" name="Default Changelist" comment="" />
+    <list default="true" id="05739269-1540-4e89-8aeb-e7794ac98ba3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Gamedev02/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev02/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev02/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev02/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev02/Library/LastSceneManagerSetup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev02/Library/LastSceneManagerSetup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev02/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev02/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev02/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev02/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/.vs/Gamedev03/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/.vs/Gamedev03/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Assets/Scenes/Menu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Assets/Scripts/MenuScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Assets/Scripts/MenuScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/Artifacts/64/64eb2ab4ebbffe2c3a3fe3aeb7dcb38d" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/Artifacts/e0/e01af46493706a253ffbe134ba90db17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/EditorUserBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/EditorUserBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/InspectorExpandedItems.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/LastSceneManagerSetup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/LastSceneManagerSetup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/ScriptAssemblies/Assembly-CSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/ScriptAssemblies/Assembly-CSharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/ShaderCache/EditorEncounteredVariants" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/ShaderCache/EditorEncounteredVariants" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev03/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev03/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Assets/Images/duszekprzezroczystość.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Assets/Images/duszekprzezroczystość.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/12/12de3f183d33c20c731d8671bf683037" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/16/1627006b7f507d24fd66a31be4dc8880" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/18/18e4980f56e0db7abceaf923dac359c3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/1b/1bbe760d20f4ee09b0ef0197b46c75b3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/1f/1fd4e3821502c9098872b28e4755321b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/70/70d880468aff3270fa46d8840552ec6a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/a8/a80401b79c4ebb22281a0132409acebe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/b7/b72e2f6595872bb564298739303e9b38" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/c5/c5dfca5abfd0851ea5b7b34e45083c60" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/Artifacts/ea/ea06ee0cfd743cbf0b13886c48ac1666" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/CurrentLayout-default.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/CurrentLayout-default.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/InspectorExpandedItems.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/LastSceneManagerSetup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/LastSceneManagerSetup.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/SceneVisibilityState.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/SceneVisibilityState.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/Library/StateCache/SceneView/8c/8cd7c613bf844de3b80696e27a479d5e.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gamedev2DProject/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Gamedev2DProject/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab03Parallel/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab03Parallel/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab04Parallel/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab04Parallel/src/main/java/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +82,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pai" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -118,6 +165,10 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="547" y="238" width="585" height="534" key="find.popup/0.0.1680.1010@0.0.1680.1010" timestamp="1605267594756" />
+    <state x="431" y="166" key="new project wizard" timestamp="1605691371847">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="431" y="166" key="new project wizard/0.0.1680.1010@0.0.1680.1010" timestamp="1605691371847" />
     <state x="503" y="217" key="search.everywhere.popup" timestamp="1605267263859">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
