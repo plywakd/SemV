@@ -71,6 +71,16 @@ public class Main {
         return result;
     }
 
+    public static int calcID3V2size(){
+        int[] sizeTab = new int[4];
+        int size = 0;
+        for(int i=0;i<4;i++){
+            sizeTab[i] = usign_header_id3v2[i+6] & 0x7F;
+            size += sizeTab[i];
+        }
+        return size;
+    }
+
     public static void main(String[] args) throws IOException {
 
 
@@ -78,7 +88,9 @@ public class Main {
         tagID3V1 = checkID3V1();
 
         if(tagID3V2){
-
+            System.out.println("Wersja");
+            System.out.println("Flaga");
+            System.out.println("Rozmiar: "+ calcID3V2size());
         }
         else if(tagID3V1){
             System.out.println("Tytul: " + bytesToString(usign_header_id3v1, 3, 33));
@@ -90,8 +102,6 @@ public class Main {
         }
 
         fileInput.close();
-
-        Arrays.stream(usign_header_id3v2).forEach(bytes -> System.out.println(bytes));
 
         System.out.println("TAGv2:" + tagID3V2);
         System.out.println("TAGv1:" + tagID3V1);
