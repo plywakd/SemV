@@ -20,6 +20,13 @@ public class Main {
                 int tmp = (int) (input[i] & 0xff);
                 usign_bytes[i] = tmp;
             }
+            if ((char)usign_bytes[0] == 'I') {
+                if ((char)usign_bytes[1] == 'D') {
+                    if ((char)usign_bytes[2] == '3') {
+                        return true;
+                    }
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
