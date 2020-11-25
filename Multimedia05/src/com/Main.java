@@ -62,6 +62,15 @@ public class Main {
         return false;
     }
 
+    public static String bytesToString(int[] header, int startRange, int stopRange) {
+        char[] chars = new char[stopRange - startRange + 1];
+        for (int i = 0; i < stopRange - startRange; i++) {
+            chars[i] = (char) header[i + startRange];
+        }
+        String result = new String(chars);
+        return result;
+    }
+
     public static void main(String[] args) throws IOException {
 
 
@@ -72,7 +81,12 @@ public class Main {
 
         }
         else if(tagID3V1){
-
+            System.out.println("Tytul: " + bytesToString(usign_header_id3v1, 3, 33));
+            System.out.println("Artysta: " + bytesToString(usign_header_id3v1, 33, 63));
+            System.out.println("Album: " + bytesToString(usign_header_id3v1, 63, 93));
+            System.out.println("Rok: " + bytesToString(usign_header_id3v1, 93, 97));
+            System.out.println("Komentarz: " + bytesToString(usign_header_id3v1, 97, 127));
+            System.out.println("Gatunek: " + (byte) usign_header_id3v1[127]);
         }
 
         fileInput.close();
