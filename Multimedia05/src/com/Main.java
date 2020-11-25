@@ -13,6 +13,7 @@ public class Main {
     public static FileInputStream fileInput = null;
     public FileOutputStream fileOutput = null;
     public static int[] usign_header_id3v2 = new int[10];
+    public static int[] mpeg_id3v2 = new int[4];
     public static int[] usign_header_id3v1 = new int[128];
     public static boolean tagID3V2 = false;
     public static boolean tagID3V1 = false;
@@ -78,7 +79,23 @@ public class Main {
             sizeTab[i] = usign_header_id3v2[i+6] & 0x7F;
             size += sizeTab[i];
         }
-        return size;
+        return size + 10;
+    }
+
+    public static void getMPEGHeaderID3V2() throws IOException {
+        try {
+            fileInput = new FileInputStream(file);
+            fileInput.skip(10);
+            byte[] input = fileInput.readNBytes(4);
+            for (int i = 0; i < 4; i++) {
+                int tmp = (int) (input[i] & 0xff);
+                mpeg_id3v2[i] = tmp;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fileInput.close();
     }
 
     public static void main(String[] args) throws IOException {
@@ -91,6 +108,114 @@ public class Main {
             System.out.println("Wersja");
             System.out.println("Flaga");
             System.out.println("Rozmiar: "+ calcID3V2size());
+            String mpeg_ver = null;
+            switch(mpeg_id3v2[1] & 0x18){
+                case 0:
+                    mpeg_ver = "MPEG Ver. 2.5";
+                    System.out.println(mpeg_ver);
+                    break;
+                case 8:
+                    System.out.println("Reserved");
+                    break;
+                case 16:
+                    mpeg_ver = "MPEG Ver. 2";
+                    System.out.println(mpeg_ver);
+                    break;
+                case 24:
+                    mpeg_ver = "MPEG Ver. 1";
+                    System.out.println(mpeg_ver);
+                    break;
+            }
+            switch(mpeg_id3v2[1] & 0x06){
+                case 0:
+                    System.out.println("Reserved");
+                    break;
+                case 2:
+                    System.out.println("Layer 3");
+                    break;
+                case 4:
+                    System.out.println("Layer 2");
+                    break;
+                case 6:
+                    System.out.println("Layer 1");
+                    break;
+            }
+            switch(mpeg_id3v2[1] & 0x01){
+                case 0:
+                    System.out.println("Protected by CRC");
+                    break;
+                case 1:
+                    System.out.println("Not protected");
+                    break;
+            }
+            switch(mpeg_id3v2[2] & 0x0c){
+                case 0:
+                    if(mpeg_ver.equals("MPEG Ver. 2.5")){
+                        System.out.println("44100");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 2")){
+                        System.out.println("22050");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 1")){
+                        System.out.println("11025");
+                    }
+                    break;
+                case 4:
+                    if(mpeg_ver.equals("MPEG Ver. 2.5")){
+                        System.out.println("48000");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 2")){
+                        System.out.println("24000");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 1")){
+                        System.out.println("12000");
+                    }
+                    break;
+                case 8:
+                    if(mpeg_ver.equals("MPEG Ver. 2.5")){
+                        System.out.println("32000");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 2")){
+                        System.out.println("16000");
+                    }
+                    else if(mpeg_ver.equals("MPEG Ver. 1")){
+                        System.out.println("8000");
+                    }
+                    break;
+                case 12:
+                    System.out.println("Reserved");
+                    break;
+            }
+            switch(mpeg_id3v2[3] & 0xc0){
+                case 0:
+                    System.out.println("Stereo");
+                    break;
+                case 64:
+                    System.out.println("Joint stereo");
+                    break;
+                case 128:
+                    System.out.println("Dual channel");
+                    break;
+                case 192:
+                    System.out.println("Single channel");
+                    break;
+            }
+            switch(mpeg_id3v2[3] & 0x08){
+                case 0:
+                    System.out.println("Not copyrighted");
+                    break;
+                case 8:
+                    System.out.println("Copyrighted");
+                    break;
+            }
+            switch(mpeg_id3v2[3] & 0x04){
+                case 0:
+                    System.out.println("Copy of ori");
+                    break;
+                case 4:
+                    System.out.println("Original");
+                    break;
+            }
         }
         else if(tagID3V1){
             System.out.println("Tytul: " + bytesToString(usign_header_id3v1, 3, 33));
