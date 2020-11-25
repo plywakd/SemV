@@ -13,8 +13,9 @@ public class Main {
     public static boolean tagID3V2 = false;
     public static boolean tagID3V1 = false;
 
-    public static boolean checkID3V2(int[] header) {
+    public static boolean checkID3V2(int[] header) throws IOException {
         try {
+            fileInput = new FileInputStream(file);
             byte[] input = fileInput.readNBytes(10);
             for (int i = 0; i < 10; i++) {
                 int tmp = (int) (input[i] & 0xff);
@@ -30,11 +31,13 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        fileInput.close();
         return false;
     }
 
-    public static boolean checkID3V1(int[] header) {
+    public static boolean checkID3V1(int[] header) throws IOException {
         try {
+            fileInput = new FileInputStream(file);
             fileInput.skip((fileSize));
             char[] tag = new char[3];
             for (int i = 0; i < 3; i++) {
@@ -50,20 +53,22 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        fileInput.close();
         return false;
     }
 
     public static void main(String[] args) throws IOException {
 
-        try {
-            fileInput = new FileInputStream(file);
-//            fileOutput = new FileOutputStream(file, true);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
         tagID3V2 = checkID3V2(usign_bytes);
         tagID3V1 = checkID3V1(usign_bytes);
+
+        if(tagID3V2){
+
+        }
+        else if(tagID3V1){
+
+        }
 
         fileInput.close();
 
