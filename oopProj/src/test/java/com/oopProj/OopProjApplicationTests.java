@@ -43,7 +43,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 @AutoConfigureMockMvc
 @WithMockUser(username = "admin", password = "admin")
 public class OopProjApplicationTests {
-    private final String apiPath = "/api/projekty";
+    private final String apiPath = "/api/projects";
     @MockBean
     private ProjectService mockProjectService;
     @Autowired
@@ -76,8 +76,8 @@ public class OopProjApplicationTests {
         mockMvc.perform(get(apiPath + "/{projectId}", projekt.getProjectId()).accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.projektId").value(projekt.getProjectId()))
-                .andExpect(jsonPath("$.nazwa").value(projekt.getName()));
+                .andExpect(jsonPath("$.projectId").value(projekt.getProjectId()))
+                .andExpect(jsonPath("$.name").value(projekt.getName()));
         verify(mockProjectService, times(1)).getProject(projekt.getProjectId());
         verifyNoMoreInteractions(mockProjectService);
     }
@@ -97,7 +97,13 @@ public class OopProjApplicationTests {
     @Test
     public void createProjectEmptyName() throws Exception {
         Project projekt = new Project(null, "", "Opis4", null, LocalDate.of(2020, 6, 7));
-        MvcResult result = mockMvc.perform(post(apiPath).content(jacksonTester.write(projekt).getJson()).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL)).andDo(print()).andExpect(status().isBadRequest()).andReturn();
+        MvcResult result = mockMvc.perform(post(apiPath)
+                .content(jacksonTester.write(projekt).getJson())
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.ALL))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andReturn();
         verify(mockProjectService, times(0)).setProject(any(Project.class));
         Exception exception = result.getResolvedException();
         assertNotNull(exception);
@@ -111,7 +117,7 @@ public class OopProjApplicationTests {
         String jsonProjekt = jacksonTester.write(projekt).getJson();
         when(mockProjectService.getProject(projekt.getProjectId())).thenReturn(Optional.of(projekt));
         when(mockProjectService.setProject(any(Project.class))).thenReturn(projekt);
-        mockMvc.perform(put(apiPath + "/{projektId}", projekt.getProjectId()).content(jsonProjekt).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL))
+        mockMvc.perform(put(apiPath + "/{projectId}", projekt.getProjectId()).content(jsonProjekt).contentType(MediaType.APPLICATION_JSON).accept(MediaType.ALL))
                 .andDo(print())
                 .andExpect(status().isOk());
         verify(mockProjectService, times(1)).getProject(projekt.getProjectId());
@@ -121,7 +127,7 @@ public class OopProjApplicationTests {
 
     /*** Test sprawdza czy żądanie o danych parametrach stronicowania i sortowania* spowoduje przekazanie do serwisu odpowiedniego obiektu Pageable, wcześniej* wstrzykniętego do parametru wejściowego metody kontrolera*/
     @Test
-    public void getProjectsAndVerifyPageableParams()throws Exception {
+    public void getProjectsAndVerifyPageableParams() throws Exception {
         Integer page = 5;
         Integer size = 15;
         String sortProperty = "name";
