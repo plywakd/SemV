@@ -63,16 +63,16 @@ public class MyCanvas02 extends View {
         Rect toDraw = new Rect((int) rectX - 100, (int) rectY - 100, (int) rectX + 100, (int) rectY + 100);
         canvas.drawRect(toDraw, paint);
         moveMainRect();
-        if (rectX <= 0  || rectX >= width){
+        if (rectX <= 0 || rectX >= width) {
             xDelta = (-xDelta);
         }
-        if(rectY <=0 || rectY >=height){
+        if (rectY <= 0 || rectY >= height) {
             yDelta = (-yDelta);
         }
 
     }
 
-    public void moveMainRect(){
+    public void moveMainRect() {
         rectX += xDelta;
         rectY += yDelta;
         invalidate();

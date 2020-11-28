@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -74,9 +73,6 @@ public class MyCanvas01 extends View {
                     } else if (yDirection < 0) {
                         paint.setColor(Color.GREEN);
                     }
-
-                } else {
-                    System.out.println("Out of reach");
                 }
                 break;
             }
