@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05739269-1540-4e89-8aeb-e7794ac98ba3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/project-template.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/Multimedia05.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Multimedia05/src/com/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Multimedia05/src/com/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Multimedia05/src/com/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
