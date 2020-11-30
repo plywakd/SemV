@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -63,6 +65,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         int levels = 0;
+        Instant start = Instant.now();
         List<String> hrefs = getHrefs(randomWikipedia);
         System.out.println("Links on wiki " + hrefs.toString());
         while (foundLink.equals("")) {
@@ -71,8 +74,9 @@ public class Main {
             levels++;
             hrefs = new ArrayList<>(subHrefs);
         }
-        System.out.println("Check stream " + foundLink);
-        System.out.println("FOUND HREF: " + foundLink + " levels:" + levels);
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        System.out.println("FOUND HREF: " + foundLink + " LEVELS : "+ levels + "TIME TAKEN : " + timeElapsed);
 
 
     }
