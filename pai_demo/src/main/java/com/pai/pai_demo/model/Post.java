@@ -27,4 +27,10 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Account author;
 
+    public Post(String title, String content, Category category, Account author) {
+        this.title = title;
+        this.content = content;
+        this.category = category;
+        this.author = author;
+    }
 }
