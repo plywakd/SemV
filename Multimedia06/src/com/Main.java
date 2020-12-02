@@ -50,22 +50,42 @@ public class Main {
             fileInput.skipNBytes(12);
             byte[] input = fileInput.readNBytes(26);
             int[] fmtHeader = new int[26];
-            int subchunkSize = 0;
             for (int i = 0; i < 26; i++) {
                 fmtHeader[i] = (int) (input[i] & 0xff);
-                if (i > 3 && i < 8) {
-                    subchunkSize += fmtHeader[i] << (8 *  (i-4));
-                }
             }
             System.out.println("Subchunk id: " + bytesToString(fmtHeader, 0, 4));
-            System.out.println("Subchunk size : "+ subchunkSize + "B");
+            System.out.println("Subchunk size : "+ bytesToInt(fmtHeader, 4, 8) + " B");
+            int extraParamExists = bytesToInt(fmtHeader, 8, 10);
             System.out.println("Audio format: " + bytesToInt(fmtHeader, 8, 10));
             System.out.println("Num channels: " + bytesToInt(fmtHeader, 10, 12));
             System.out.println("Sample rate: " + bytesToInt(fmtHeader, 12, 16));
             System.out.println("Byte rate: " + bytesToInt(fmtHeader, 16, 20));
             System.out.println("Block align: " + bytesToInt(fmtHeader, 20, 22));
             System.out.println("Bits per sample: " + bytesToInt(fmtHeader, 22, 24));
-            System.out.println("Extra param size: " + bytesToInt(fmtHeader, 24, 26));
+            if(extraParamExists <= 0){
+                System.out.println("Extra param size: " + bytesToInt(fmtHeader, 24, 26) + " B");
+            }
+            else{
+                System.out.println("No Extra params!");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fileInput.close();
+    }
+
+    public static void readDataHeader() throws IOException {
+        try {
+            fileInput = new FileInputStream(file);
+            fileInput.skipNBytes(24);
+            byte[] input = fileInput.readNBytes(8);
+            int[] dataHeader = new int[8];
+            for (int i = 0; i < 8; i++) {
+                dataHeader[i] = (int) (input[i] & 0xff);
+            }
+            System.out.println("Subchunk 2id: " + bytesToString(dataHeader, 0, 4));
+            System.out.println("Subchunk 2size: " + bytesToInt(dataHeader, 4, 8) + " B");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,5 +96,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         readRiffHeader();
         readFmtHeader();
+        readDataHeader();
     }
 }
