@@ -6,12 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class MyCanvas01 extends View {
@@ -33,6 +37,7 @@ public class MyCanvas01 extends View {
         createSnowParticles();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -55,6 +60,7 @@ public class MyCanvas01 extends View {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void snowHandler() {
         paint.setColor(Color.WHITE);
         for (CanvCircle particle : snow) {
@@ -62,8 +68,6 @@ public class MyCanvas01 extends View {
                 if (particle.getCy() < height - particle.getR()) {
                     moveSnow(particle);
                 } else {
-                    counter++;
-                    System.out.println("Falling end "+ counter);
                     particle.setFalling(false);
                 }
             }
@@ -71,9 +75,20 @@ public class MyCanvas01 extends View {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void moveSnow(CanvCircle particle) {
         int deltaCy = particle.getCy() + particle.getGravity();
-        particle.setCy(deltaCy);
+        Optional collision = Optional.of(snow.stream()
+                .filter(p -> !p.isFalling())
+                .filter(p -> Math.abs(p.getCx() - particle.getCx()) <= p.getR())
+                .filter(p -> p.getCy() - (particle.getCy() + (particle.getR() / 2)) <= p.getR())
+                .findAny()).orElse(null);
+        if (collision.isPresent()) {
+            System.out.println("col element: " + collision);
+            particle.setFalling(false);
+        } else {
+            particle.setCy(deltaCy);
+        }
         invalidate();
     }
 
