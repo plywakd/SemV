@@ -5,12 +5,14 @@ public class CanvCircle {
     private int cy;
     private  int r;
     private int gravity;
+    private boolean falling;
 
-    public CanvCircle(int cx, int cy, int r, int gravity) {
+    public CanvCircle(int cx, int cy, int r, int gravity, boolean falling) {
         this.cx = cx;
         this.cy = cy;
         this.r = r;
         this.gravity = gravity;
+        this.falling = falling;
     }
 
     public int getCx() {
@@ -43,5 +45,13 @@ public class CanvCircle {
 
     public void setGravity(int gravity) {
         this.gravity = gravity;
+    }
+
+    public boolean isFalling() {
+        return falling;
+    }
+
+    public void setFalling(boolean falling) {
+        this.falling = falling;
     }
 }

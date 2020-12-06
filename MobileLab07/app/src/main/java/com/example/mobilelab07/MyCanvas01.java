@@ -21,58 +21,60 @@ public class MyCanvas01 extends View {
     private int width;
     private Context c;
     private Random rand = new Random();
-    private List<CanvCircle> snow= new ArrayList<>();
+    private List<CanvCircle> snow = new ArrayList<>();
+    private boolean created = false;
+    public int counter = 0;
     Paint paint = new Paint();
 
-    public static int getScreenWidth() {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
-
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
-    }
 
     public MyCanvas01(Context context) {
         super(context);
         c = context;
-        width = getScreenWidth();
-        height = getScreenHeight();
+        createSnowParticles();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
+        this.width = canvas.getWidth();
+        this.height = canvas.getHeight();
         paint.setColor(Color.BLACK);
         canvas.drawPaint(paint);
-        snowFall(canvas);
-        snowHandler(canvas);
+        snowHandler();
+        invalidate();
     }
 
-    public void snowFall(Canvas canvas){
-        paint.setColor(Color.WHITE);
-        for(int i=0;i<100;i++){
+    public void createSnowParticles() {
+        for (int i = 0; i < 100; i++) {
             int cx = rand.nextInt(1080);
             int cy = rand.nextInt(300);
-            int r = rand.nextInt(10)+1;
-            int gravity = rand.nextInt(10)+1;
-            snow.add(new CanvCircle(cx,cy,r,gravity));
+            int r = rand.nextInt(9) + 3;
+            int gravity = rand.nextInt(10) + 1;
+            snow.add(new CanvCircle(cx, cy, r, gravity, true));
         }
     }
 
-    public void snowHandler(Canvas canvas){
-        for(CanvCircle particle : snow){
-            System.out.println("Gravity: "+particle.getGravity());
-            canvas.drawCircle(particle.getCx(),particle.getCy(),particle.getR(),paint);
-            int deltaCy = particle.getCy()+particle.getGravity();
-            if (deltaCy<height){
-                particle.setCy(deltaCy);
+    public void snowHandler() {
+        paint.setColor(Color.WHITE);
+        for (CanvCircle particle : snow) {
+            if (particle.isFalling()) {
+                if (particle.getCy() < height - particle.getR()) {
+                    moveSnow(particle);
+                } else {
+                    counter++;
+                    System.out.println("Falling end "+ counter);
+                    particle.setFalling(false);
+                }
             }
-            else{
-                System.out.println("End particle");
-            }
-            invalidate();
+            canvas.drawCircle(particle.getCx(), particle.getCy(), particle.getR(), paint);
         }
+    }
+
+    public void moveSnow(CanvCircle particle) {
+        int deltaCy = particle.getCy() + particle.getGravity();
+        particle.setCy(deltaCy);
+        invalidate();
     }
 
 }
