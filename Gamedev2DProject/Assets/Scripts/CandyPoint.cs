@@ -22,7 +22,7 @@ public class CandyPoint : MonoBehaviour
         Debug.Log(collision.name);
         if(collision.name.Equals("Player"))
         {
-            Debug.Log("Candy!");
+            Destroy(gameObject);
         }
     }
 }
