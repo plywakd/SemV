@@ -7,9 +7,13 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -22,22 +26,27 @@ public class Main {
     public static Set<String> newHrefs;
     public static Set<String> subHrefs = new HashSet<>();
 
-    public static String getHTML(String urlToRead) throws Exception {
+    public static String getHTML(String urlToRead) {
         StringBuilder result = new StringBuilder();
-        URL url = new URL(urlToRead);
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        try {
+            URL url = new URL(urlToRead);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            rd.close();
+        } catch (Exception err) {
+            System.out.println("error occured in getting html:" + err);
+            result.append("");
         }
-        rd.close();
         return result.toString();
     }
 
-    public static Set<String> getHrefs(String randomWikiPage) throws Exception {
-        String getHTMLResult = getHTML(randomWikiPage);
+    public static Set<String> getHrefs(String WikiPage) {
+        String getHTMLResult = getHTML(WikiPage);
         //pattern to find groups of <a> tag where group 0 is whole, group 1 is first " sign and group 2 is href value
         Pattern p = Pattern.compile("<a\\s+(?:[^>]*?\\s+)?href=([\"'])\\/wiki(.*?)\\1");
         Matcher m = p.matcher(getHTMLResult);
@@ -49,22 +58,41 @@ public class Main {
     }
 
     public static void lookHref(Set<String> hrefs) throws Exception {
-        for (String href : hrefs) {
-            if (!href.contains(".") && !href.contains(":") && !href.contains("&")) {
-                newHrefs = getHrefs(wikiHeader + href);
-                subHrefs.addAll(newHrefs);
-                foundLink = newHrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
-                if (!foundLink.equals("")) break;
-            }
+        List<CompletableFuture<Boolean>> cfParseHref = hrefs.stream()
+                .map(s -> CompletableFuture.supplyAsync(
+                        () -> (s).equals(wikiHrefToFind)))
+                .collect(Collectors.toList());
+
+        CompletableFuture<List<Boolean>> results = CompletableFuture
+                .allOf(cfParseHref.toArray(new CompletableFuture[0]))
+                .thenApply(r -> cfParseHref.stream().map(CompletableFuture::join).collect(Collectors.toList()));
+
+        Optional result = results.get().stream().filter(r -> r == true).findFirst();
+        if (result.isPresent()) {
+            foundLink = "found";
+        } else {
+            List<CompletableFuture<Set<String>>> cfGetSubHrefs = hrefs.stream()
+                    .map(h -> CompletableFuture.supplyAsync(
+                            () -> getHrefs(wikiHeader + h)
+                    )).collect(Collectors.toList());
+
+            CompletableFuture<List<Set<String>>> subHrefsResults = CompletableFuture
+                    .allOf(cfGetSubHrefs.toArray(new CompletableFuture[0]))
+                    .thenApply(s -> cfGetSubHrefs.stream()
+                            .map(CompletableFuture::join)
+                            .collect(Collectors.toList()));
+
+            subHrefsResults.get().stream()
+                    .filter(s-> !s.isEmpty() && !s.contains(".") && !s.contains(":") && !s.contains("&"))
+                    .forEach(s->subHrefs.addAll(s));
         }
     }
 
     public static void main(String[] args) throws Exception {
-        //TODO completablefuture ??
         int levels = 0;
         Instant start = Instant.now();
         Set<String> hrefs = getHrefs(randomWikipedia);
-        System.out.println("Links on wiki " + hrefs.toString());
+//        System.out.println("Links on wiki " + hrefs.toString());
         foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
         while (foundLink.equals("")) {
             System.out.println("LEVEL: " + levels);
@@ -74,7 +102,7 @@ public class Main {
         }
         Instant finish = Instant.now();
         long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("FOUND HREF: " + foundLink + " LEVELS : "+ levels + " TIME TAKEN : " + timeElapsed + "s");
+        System.out.println("FOUND HREF: " + foundLink + " LEVELS : " + levels + " TIME TAKEN : " + timeElapsed + "s");
 
 
     }
