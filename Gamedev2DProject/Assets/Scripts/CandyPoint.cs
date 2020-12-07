@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class CandyPoint : MonoBehaviour
 {
-    //private GameObject gm;
+    GameObject gm;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        gm = GameObject.Find("GM");
+    }
+
     void Start()
     {
         //gm = GameObject.FindGameObjectWithTag("PointsMenager");   
@@ -19,9 +24,9 @@ public class CandyPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if(collision.name.Equals("Player"))
         {
+            gm.GetComponent<PointsGM>().addPoint();
             Destroy(gameObject);
         }
     }

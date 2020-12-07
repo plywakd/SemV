@@ -14,7 +14,13 @@ public class PointsGM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void addPoint()
+    {
+        Points++;
+        Debug.Log(Points.ToString());
     }
 
     void setPoints(int pt)
