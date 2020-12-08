@@ -6,9 +6,12 @@ import com.pai.pai_demo.model.Post;
 import com.pai.pai_demo.service.AccountService;
 import com.pai.pai_demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -65,8 +68,13 @@ public class BlogController {
     }
 
     @PostMapping("/posts/publication")
-    public Post addPost(@ModelAttribute("postDto") PostDto postDto) {
-        return postService.addPost(postDto);
+    public String addNewPost(@Valid @ModelAttribute("postDto") PostDto postDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            Arrays.stream(bindingResult.getSuppressedFields()).forEach(System.out::println);
+            return "Validation errors!";
+        }
+        postService.addPost(postDto);
+        return "OK";
     }
 }
 
