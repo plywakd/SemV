@@ -27,8 +27,8 @@ public class PostService {
         ).orElse(null);
     }
 
-    public Map getAggregatedPostsByCategory(){
+    public Map getAggregatedPostsByCategory() {
         return postRepository.getAggregatedPostsByCategory().stream()
-                .collect(Collectors.toMap(o->o[0],o-> o[1]));
+                .collect(Collectors.toMap(o -> o[0], o -> o[1]));
     }
 }
