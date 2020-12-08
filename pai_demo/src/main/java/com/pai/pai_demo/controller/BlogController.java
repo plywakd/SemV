@@ -2,7 +2,6 @@ package com.pai.pai_demo.controller;
 
 import com.pai.pai_demo.dtos.PostDto;
 import com.pai.pai_demo.model.Account;
-import com.pai.pai_demo.model.Post;
 import com.pai.pai_demo.service.AccountService;
 import com.pai.pai_demo.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -70,19 +69,24 @@ public class BlogController {
 
     @PostMapping("/posts/publication")
     public String addNewPost(@Valid @ModelAttribute("postDto") PostDto postDto, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
-            return "Validation errors! "+bindingResult.getFieldErrors().stream()
-                    .map(err-> err.getField() + " : " + err.getDefaultMessage())
+        if (bindingResult.hasErrors()) {
+            return "Validation errors! " + bindingResult.getFieldErrors().stream()
+                    .map(err -> err.getField() + " : " + err.getDefaultMessage())
                     .collect(Collectors.joining("\n"));
         }
-        if(postDto.getCategory() == null){
+        if (postDto.getCategory() == null) {
             return "Empty category";
         }
-        if(!accountService.getAccountById(postDto.getAuthorId()).isPresent()){
+        if (!accountService.getAccountById(postDto.getAuthorId()).isPresent()) {
             return "Invalid author id";
         }
         postService.addPost(postDto);
         return "OK";
+    }
+
+    @GetMapping("Posts/aggregatedByCategory")
+    public Map<Object, Object> getAggregatedPostsByCategory() {
+        return postService.getAggregatedPostsByCategory();
     }
 }
 

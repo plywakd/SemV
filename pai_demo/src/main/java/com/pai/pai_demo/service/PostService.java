@@ -8,7 +8,9 @@ import com.pai.pai_demo.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -23,5 +25,10 @@ public class PostService {
         return optionalAccount.map(account ->
                 postRepository.save(new Post(postDto.getTitle(), postDto.getContent(), postDto.getCategory(), account))
         ).orElse(null);
+    }
+
+    public Map getAggregatedPostsByCategory(){
+        return postRepository.getAggregatedPostsByCategory().stream()
+                .collect(Collectors.toMap(o->o[0],o-> o[1]));
     }
 }
