@@ -1,13 +1,16 @@
 package com;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 public class Main {
 
     public static File file = new File("C:\\Prace - UTP\\Multimedialne\\Lab05\\abc.wav");
     public static long fileSize = file.length();
     public static FileInputStream fileInput = null;
-    public FileOutputStream fileOutput = null;
+    public static FileOutputStream fileOutput = null;
+    public static byte[] data = new byte[Math.toIntExact(fileSize)];
 
     public static String bytesToString(int[] header, int startRange, int stopRange) {
         char[] chars = new char[stopRange - startRange];
@@ -22,6 +25,15 @@ public class Main {
         int result = 0;
         for (int i = 0; i < stopRange - startRange; i++) {
             result += header[i + startRange] << (8*i);
+        }
+        return result;
+    }
+
+    public static byte[] stringToBytes(String str, int maxLen) {
+        int strLen = str.length();
+        byte[] result = new byte[maxLen];
+        for (int i = 0; i < maxLen && i < strLen; i++) {
+            result[i] = (byte) str.charAt(i);
         }
         return result;
     }
@@ -93,9 +105,26 @@ public class Main {
         fileInput.close();
     }
 
+    public static void readAllData() throws IOException {
+        fileInput = new FileInputStream(file);
+        data = fileInput.readAllBytes();
+    }
+
+    public static void monoToStereo() throws IOException {
+        fileOutput = new FileOutputStream(file);
+        FileChannel ch = fileOutput.getChannel();
+        data[22] = 2;
+        ch.write(ByteBuffer.wrap(data));
+        fileOutput.close();
+    }
+
     public static void main(String[] args) throws IOException {
         readRiffHeader();
         readFmtHeader();
-        readDataHeader();
+//        readDataHeader();
+        readAllData();
+        monoToStereo();
+        readRiffHeader();
+        readFmtHeader();
     }
 }
