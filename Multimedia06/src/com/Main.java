@@ -129,6 +129,7 @@ public class Main {
         data[28] = (byte) (newByteRate);
         data[32] = (byte) newBlockAlign;
         System.out.println("Check byteRate function: " + newByteRate + " , " + newBlockAlign);
+//        TODO double samples for stereo : from bajt1 bajt2 | bajt3 bajt4| -> bajt1 bajt2 | bajt1 bajt2 | bajt3 bajt4 | bajt3 bajt4 |
         ch.write(ByteBuffer.wrap(data));
         fileOutput.close();
     }
