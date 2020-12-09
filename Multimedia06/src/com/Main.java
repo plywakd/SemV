@@ -21,10 +21,18 @@ public class Main {
         return result;
     }
 
-    public static int bytesToInt(int[] header, int startRange, int stopRange) {
+    public static int intTabToIntValue(int[] header, int startRange, int stopRange) {
         int result = 0;
         for (int i = 0; i < stopRange - startRange; i++) {
             result += header[i + startRange] << (8 * i);
+        }
+        return result;
+    }
+
+    public static int bytesToInt(byte[] header, int startRange, int stopRange) {
+        int result = 0;
+        for (int i = 0; i < stopRange - startRange; i++) {
+            result += (int) (header[i + startRange] & 0xff) << (8 * i);
         }
         return result;
     }
@@ -47,7 +55,7 @@ public class Main {
                 wavHeader[i] = (int) (input[i] & 0xff);
             }
             System.out.println("Chunk id: " + bytesToString(wavHeader, 0, 4));
-            System.out.println("Chunk size :" + bytesToInt(wavHeader, 4, 8) + " B");
+            System.out.println("Chunk size :" + intTabToIntValue(wavHeader, 4, 8) + " B");
             System.out.println("Format is: " + bytesToString(wavHeader, 8, 12));
 
         } catch (IOException e) {
@@ -66,16 +74,16 @@ public class Main {
                 fmtHeader[i] = (int) (input[i] & 0xff);
             }
             System.out.println("Subchunk id: " + bytesToString(fmtHeader, 0, 4));
-            System.out.println("Subchunk size : " + bytesToInt(fmtHeader, 4, 8) + " B");
-            int extraParamExists = bytesToInt(fmtHeader, 8, 10);
-            System.out.println("Audio format: " + bytesToInt(fmtHeader, 8, 10));
-            System.out.println("Num channels: " + bytesToInt(fmtHeader, 10, 12));
-            System.out.println("Sample rate: " + bytesToInt(fmtHeader, 12, 16));
-            System.out.println("Byte rate: " + bytesToInt(fmtHeader, 16, 20));
-            System.out.println("Block align: " + bytesToInt(fmtHeader, 20, 22));
-            System.out.println("Bits per sample: " + bytesToInt(fmtHeader, 22, 24));
+            System.out.println("Subchunk size : " + intTabToIntValue(fmtHeader, 4, 8) + " B");
+            int extraParamExists = intTabToIntValue(fmtHeader, 8, 10);
+            System.out.println("Audio format: " + intTabToIntValue(fmtHeader, 8, 10));
+            System.out.println("Num channels: " + intTabToIntValue(fmtHeader, 10, 12));
+            System.out.println("Sample rate: " + intTabToIntValue(fmtHeader, 12, 16));
+            System.out.println("Byte rate: " + intTabToIntValue(fmtHeader, 16, 20));
+            System.out.println("Block align: " + intTabToIntValue(fmtHeader, 20, 22));
+            System.out.println("Bits per sample: " + intTabToIntValue(fmtHeader, 22, 24));
             if (extraParamExists <= 0) {
-                System.out.println("Extra param size: " + bytesToInt(fmtHeader, 24, 26) + " B");
+                System.out.println("Extra param size: " + intTabToIntValue(fmtHeader, 24, 26) + " B");
             } else {
                 System.out.println("No Extra params!");
             }
@@ -96,7 +104,7 @@ public class Main {
                 dataHeader[i] = (int) (input[i] & 0xff);
             }
             System.out.println("Subchunk 2id: " + bytesToString(dataHeader, 0, 4));
-            System.out.println("Subchunk 2size: " + bytesToInt(dataHeader, 4, 8) + " B");
+            System.out.println("Subchunk 2size: " + intTabToIntValue(dataHeader, 4, 8) + " B");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -113,6 +121,14 @@ public class Main {
         fileOutput = new FileOutputStream(file);
         FileChannel ch = fileOutput.getChannel();
         data[22] = 2;
+        int newByteRate = bytesToInt(data, 28, 32) * data[22];
+        int newBlockAlign = bytesToInt(data, 32, 34) * data[22];
+        data[31] = (byte) (newByteRate >>> 24);
+        data[30] = (byte) (newByteRate >>> 16);
+        data[29] = (byte) (newByteRate >>> 8);
+        data[28] = (byte) (newByteRate);
+        data[32] = (byte) newBlockAlign;
+        System.out.println("Check byteRate function: " + newByteRate + " , " + newBlockAlign);
         ch.write(ByteBuffer.wrap(data));
         fileOutput.close();
     }
@@ -123,6 +139,7 @@ public class Main {
 //        readDataHeader();
         readAllData();
         monoToStereo();
+        System.out.println("======================================================");
         readRiffHeader();
         readFmtHeader();
     }
