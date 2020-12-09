@@ -21,10 +21,10 @@ public class Main {
         return result;
     }
 
-    public static int bytesToInt(int[] header, int startRange, int stopRange){
+    public static int bytesToInt(int[] header, int startRange, int stopRange) {
         int result = 0;
         for (int i = 0; i < stopRange - startRange; i++) {
-            result += header[i + startRange] << (8*i);
+            result += header[i + startRange] << (8 * i);
         }
         return result;
     }
@@ -47,7 +47,7 @@ public class Main {
                 wavHeader[i] = (int) (input[i] & 0xff);
             }
             System.out.println("Chunk id: " + bytesToString(wavHeader, 0, 4));
-            System.out.println("Chunk size :" + bytesToInt(wavHeader, 4,8) + " B");
+            System.out.println("Chunk size :" + bytesToInt(wavHeader, 4, 8) + " B");
             System.out.println("Format is: " + bytesToString(wavHeader, 8, 12));
 
         } catch (IOException e) {
@@ -66,7 +66,7 @@ public class Main {
                 fmtHeader[i] = (int) (input[i] & 0xff);
             }
             System.out.println("Subchunk id: " + bytesToString(fmtHeader, 0, 4));
-            System.out.println("Subchunk size : "+ bytesToInt(fmtHeader, 4, 8) + " B");
+            System.out.println("Subchunk size : " + bytesToInt(fmtHeader, 4, 8) + " B");
             int extraParamExists = bytesToInt(fmtHeader, 8, 10);
             System.out.println("Audio format: " + bytesToInt(fmtHeader, 8, 10));
             System.out.println("Num channels: " + bytesToInt(fmtHeader, 10, 12));
@@ -74,10 +74,9 @@ public class Main {
             System.out.println("Byte rate: " + bytesToInt(fmtHeader, 16, 20));
             System.out.println("Block align: " + bytesToInt(fmtHeader, 20, 22));
             System.out.println("Bits per sample: " + bytesToInt(fmtHeader, 22, 24));
-            if(extraParamExists <= 0){
+            if (extraParamExists <= 0) {
                 System.out.println("Extra param size: " + bytesToInt(fmtHeader, 24, 26) + " B");
-            }
-            else{
+            } else {
                 System.out.println("No Extra params!");
             }
 
