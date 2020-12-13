@@ -81,16 +81,18 @@ public class MyCanvas01 extends View {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void moveSnow(CanvCircle particle) {
         int deltaCy = particle.getCy() + particle.getGravity();
+        int deltaCx = (int) (particle.getCx() + particle.getFallAngle());
         Optional collision = Optional.of(snow.stream()
                 .filter(p -> !p.isFalling())
-                .filter(p -> Math.abs(p.getCx() - particle.getCx()) <= p.getR())
-                .filter(p -> p.getCy() - (particle.getCy() + (particle.getR() / 2)) <= p.getR())
+                .filter(p -> Math.abs(p.getCx() - particle.getCx()) <= p.getR()/2)
+                .filter(p -> p.getCy() - (particle.getCy() + (particle.getR() / 2)) <= p.getR()/2)
                 .findAny()).orElse(null);
         if (collision.isPresent()) {
             counter++;
             particle.setFalling(false);
         } else {
             particle.setCy(deltaCy);
+            particle.setCx(deltaCx);
         }
         invalidate();
     }

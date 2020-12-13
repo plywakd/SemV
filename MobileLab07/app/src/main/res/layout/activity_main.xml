@@ -11,7 +11,7 @@
         android:layout_width="125dp"
         android:layout_height="62dp"
         android:gravity="center"
-        android:text="MobileLab07"
+        android:text="MobileLab08"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
