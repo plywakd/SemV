@@ -26,4 +26,13 @@ public class Account {
     private boolean status;
     @Column(name = "reg_date_time")
     private LocalDateTime registrationDateTime;
+
+    public Account(String name, String lastName, String email, String password) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.status = false;
+        this.registrationDateTime = LocalDateTime.now();
+    }
 }

@@ -18,7 +18,16 @@ public class Task {
     private int taskId;
     private String title;
     private String description;
-    private LocalDateTime addedDate;
+    @Column(name="add_date")
+    private LocalDateTime addDate;
     private Type type;
     private Status status;
+
+    public Task(String title, String description, Type type, Status status) {
+        this.title = title;
+        this.description = description;
+        this.addDate = LocalDateTime.now();
+        this.type = type;
+        this.status = status;
+    }
 }
