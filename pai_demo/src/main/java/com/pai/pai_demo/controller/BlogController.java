@@ -84,7 +84,7 @@ public class BlogController {
         return "OK";
     }
 
-    @GetMapping("Posts/aggregatedByCategory")
+    @GetMapping("/posts/aggregatedByCategory")
     public Map<Object, Object> getAggregatedPostsByCategory() {
         return postService.getAggregatedPostsByCategory();
     }

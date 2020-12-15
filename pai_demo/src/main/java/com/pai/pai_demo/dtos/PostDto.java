@@ -15,10 +15,10 @@ public class PostDto {
     @Size(min = 5, max = 255, message = "Title must contain at least {min} to {max} characters")
     private String title;
     @NotBlank(message = "Content must be not null")
-    @Size(min = 255, message = "Content must contain at least {min} characters")
+    @Size(min = 25, message = "Content must contain at least {min} characters")
     private String content;
     private Category category;
-    @NotBlank(message = "Author id must be not null")
+//    @NotBlank(message = "Author id must be not null")
     private int authorId;
 
     public String getTitle() {
