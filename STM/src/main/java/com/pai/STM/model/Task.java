@@ -18,10 +18,14 @@ public class Task {
     private int taskId;
     private String title;
     private String description;
-    @Column(name="add_date")
+    @Column(name = "add_date")
     private LocalDateTime addDate;
     private Type type;
+    @Enumerated(value = EnumType.STRING)
     private Status status;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="assigned_account", nullable=false)
+    private Account assignedAccount;
 
     public Task(String title, String description, Type type, Status status) {
         this.title = title;

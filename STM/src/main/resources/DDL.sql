@@ -1,1 +1,3 @@
---CREATE USER ...
+CREATE USER stm_user WITH PASSWORD 'stm_password';
+CREATE DATABASE stm_db;
+GRANT ALL PRIVILEGES ON DATABASE stm_user to stm_db;

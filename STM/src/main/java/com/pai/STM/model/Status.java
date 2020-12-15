@@ -1,9 +1,9 @@
 package com.pai.STM.model;
 
 public enum Status {
-    NEW("NEW"),
-    IN_PROGRESS("IN PROGRESS"),
-    DONE("DONE");
+    NEW("New task"),
+    IN_PROGRESS("Task in progress"),
+    DONE("Task Done");
 
     private final String statusType;
 

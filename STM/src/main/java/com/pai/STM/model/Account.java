@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,6 +27,8 @@ public class Account {
     private boolean status;
     @Column(name = "reg_date_time")
     private LocalDateTime registrationDateTime;
+    @OneToMany(mappedBy = "assignedAccount")
+    private List<Task> tasks;
 
     public Account(String name, String lastName, String email, String password) {
         this.name = name;
