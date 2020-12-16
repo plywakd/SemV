@@ -157,6 +157,37 @@ public class Main {
             fileOutput.close();
         } else System.out.println("ALREADY STEREO FILE");
     }
+    public static void stereoToMono(){
+//    TODO average from two channels to one
+        if (data[22] == 2) {
+            data[22] = 1;
+            int newByteRate = bytesToInt(data, 28, 32) /2;
+            int newBlockAlign = bytesToInt(data, 32, 34) /2;
+            data[31] = (byte) (newByteRate >>> 24);
+            data[30] = (byte) (newByteRate >>> 16);
+            data[29] = (byte) (newByteRate >>> 8);
+            data[28] = (byte) newByteRate;
+            data[32] = (byte) newBlockAlign;
+            System.out.println("Num channels: "+data[22]+" Check byteRate function: " + bytesToInt(data,28,32) + " , " + newBlockAlign);
+//            ch.write(ByteBuffer.wrap(data));
+            byte[] monoData = Arrays.copyOfRange(data, 44, Math.toIntExact(fileSize));
+            byte[] stereoData = new byte[monoData.length * 2];
+            for (int i =0;i<44;i++){
+                monoToStereo[i] = data[i];
+            }
+            for (int i = 0; i < stereoData.length; i += 4) {
+                stereoData[i] = monoData[i / 2];
+                stereoData[i + 1] = monoData[(i / 2) + 1];
+                stereoData[i + 2] = stereoData[i];
+                stereoData[i + 3] = stereoData[i + 1];
+            }
+            System.out.println(stereoData.length+","+monoToStereo.length);
+            System.arraycopy(stereoData, 0, monoToStereo, 44, stereoData.length);
+//            fileOutput.write(monoToStereo);
+            System.out.println("New stereo file saved!");
+//            fileOutput.close();
+        } else System.out.println("ALREADY MONO FILE");
+    }
 
     public static void main(String[] args) throws IOException {
         readRiffHeader(file);
