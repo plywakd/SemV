@@ -3,6 +3,7 @@ package com;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Arrays;
 
 public class Main {
 
@@ -11,6 +12,7 @@ public class Main {
     public static FileInputStream fileInput = null;
     public static FileOutputStream fileOutput = null;
     public static byte[] data = new byte[Math.toIntExact(fileSize)];
+    public static byte[] monoToStereo = new byte[(Math.toIntExact(fileSize) * 2)-44];
 
     public static String bytesToString(int[] header, int startRange, int stopRange) {
         char[] chars = new char[stopRange - startRange];
@@ -46,7 +48,7 @@ public class Main {
         return result;
     }
 
-    public static void readRiffHeader() throws IOException {
+    public static void readRiffHeader(File file) throws IOException {
         try {
             fileInput = new FileInputStream(file);
             byte[] input = fileInput.readNBytes(12);
@@ -64,7 +66,7 @@ public class Main {
         fileInput.close();
     }
 
-    public static void readFmtHeader() throws IOException {
+    public static void readFmtHeader(File file) throws IOException {
         try {
             fileInput = new FileInputStream(file);
             fileInput.skipNBytes(12);
@@ -113,35 +115,57 @@ public class Main {
     }
 
     public static void readAllData() throws IOException {
-        fileInput = new FileInputStream(file);
-        data = fileInput.readAllBytes();
+        try {
+            fileInput = new FileInputStream(file);
+            data = fileInput.readAllBytes();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fileInput.close();
     }
 
     public static void monoToStereo() throws IOException {
-        fileOutput = new FileOutputStream(file);
-        FileChannel ch = fileOutput.getChannel();
-        data[22] = 2;
-        int newByteRate = bytesToInt(data, 28, 32) * data[22];
-        int newBlockAlign = bytesToInt(data, 32, 34) * data[22];
-        data[31] = (byte) (newByteRate >>> 24);
-        data[30] = (byte) (newByteRate >>> 16);
-        data[29] = (byte) (newByteRate >>> 8);
-        data[28] = (byte) (newByteRate);
-        data[32] = (byte) newBlockAlign;
-        System.out.println("Check byteRate function: " + newByteRate + " , " + newBlockAlign);
-//        TODO double samples for stereo : from bajt1 bajt2 | bajt3 bajt4| -> bajt1 bajt2 | bajt1 bajt2 | bajt3 bajt4 | bajt3 bajt4 |
-        ch.write(ByteBuffer.wrap(data));
-        fileOutput.close();
+        fileOutput = new FileOutputStream("C:\\Prace - UTP\\Multimedialne\\Lab05\\abc_stereo.wav");
+//        TODO can be accessed via opening stream without loading whole file to data tab
+//        FileChannel ch = fileOutput.getChannel();
+        if (data[22] == 1) {
+            data[22] = 2;
+            int newByteRate = bytesToInt(data, 28, 32) * data[22];
+            int newBlockAlign = bytesToInt(data, 32, 34) * data[22];
+            data[31] = (byte) (newByteRate >>> 24);
+            data[30] = (byte) (newByteRate >>> 16);
+            data[29] = (byte) (newByteRate >>> 8);
+            data[28] = (byte) newByteRate;
+            data[32] = (byte) newBlockAlign;
+            System.out.println("Num channels: "+data[22]+" Check byteRate function: " + bytesToInt(data,28,32) + " , " + newBlockAlign);
+//            ch.write(ByteBuffer.wrap(data));
+            byte[] monoData = Arrays.copyOfRange(data, 44, Math.toIntExact(fileSize));
+            byte[] stereoData = new byte[monoData.length * 2];
+            for (int i =0;i<44;i++){
+                monoToStereo[i] = data[i];
+            }
+            for (int i = 0; i < stereoData.length; i += 4) {
+                stereoData[i] = monoData[i / 2];
+                stereoData[i + 1] = monoData[(i / 2) + 1];
+                stereoData[i + 2] = stereoData[i];
+                stereoData[i + 3] = stereoData[i + 1];
+            }
+            System.out.println(stereoData.length+","+monoToStereo.length);
+            System.arraycopy(stereoData, 0, monoToStereo, 44, stereoData.length);
+            fileOutput.write(monoToStereo);
+            System.out.println("New stereo file saved!");
+            fileOutput.close();
+        } else System.out.println("ALREADY STEREO FILE");
     }
 
     public static void main(String[] args) throws IOException {
-        readRiffHeader();
-        readFmtHeader();
+        readRiffHeader(file);
+        readFmtHeader(file);
 //        readDataHeader();
         readAllData();
         monoToStereo();
         System.out.println("======================================================");
-        readRiffHeader();
-        readFmtHeader();
+        readRiffHeader(new File("C:\\Prace - UTP\\Multimedialne\\Lab05\\abc_stereo.wav"));
+        readFmtHeader(new File("C:\\Prace - UTP\\Multimedialne\\Lab05\\abc_stereo.wav"));
     }
 }
