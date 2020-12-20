@@ -21,7 +21,7 @@ public class Tile {
         this.targetY = targetY;
     }
 
-    public boolean isOnRightPosition(){
+    public boolean isOnRightPosition() {
         return (x == targetX && y == targetY);
     }
 
@@ -81,11 +81,11 @@ public class Tile {
         this.targetY = targetY;
     }
 
-    public Rect getRect(){
-        return new Rect(x, y, x+width, y+height);
+    public Rect getRect() {
+        return new Rect(x, y, x + width, y + height);
     }
 
-    public boolean isOnTargetPosition(){
+    public boolean isOnTargetPosition() {
         return (this.x == this.targetX && this.y == this.targetY);
     }
 }
