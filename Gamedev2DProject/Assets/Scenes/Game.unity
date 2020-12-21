@@ -1204,6 +1204,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3169549785923755215, guid: cedcad81918c06e43a7e15a5ed6c0d2f, type: 3}
   m_PrefabInstance: {fileID: 3169549785908859820}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &2076133112
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076133111}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c2a03b976af7b3146b9a29ff56b438f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2076133114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,10 +1235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b969d274bb87e4aa7319d3a6e87244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 2076133112}
   speed: 5
   jumpForce: 10
   feetPosition: {fileID: 405193016}
-  checkRadius: 5
+  checkRadius: 1
   thisGround:
     serializedVersion: 2
     m_Bits: 256

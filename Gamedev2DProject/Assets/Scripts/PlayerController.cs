@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public Animator anim;
     public float speed;
     public float jumpForce;
     private float moveInput;
@@ -28,7 +29,15 @@ public class PlayerController : MonoBehaviour
         if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Vector2.up * jumpForce;
+            anim.SetBool("Jump", true);
         }
+
+        if(isOnGround == true && Mathf.Abs(rb.velocity.y) < 0.1f)
+        {
+            anim.SetBool("Jump", false);
+        }
+
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Menu");
@@ -39,5 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        anim.SetFloat("Speed", Mathf.Abs(moveInput));
     }
+
 }
