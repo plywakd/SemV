@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     public Animator anim;
+    public SpriteRenderer sr;
     public float speed;
     public float jumpForce;
     private float moveInput;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -48,6 +50,14 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        if(moveInput < 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
         anim.SetFloat("Speed", Mathf.Abs(moveInput));
     }
 
