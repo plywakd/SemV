@@ -1,15 +1,14 @@
-<!DOCTYPEHTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
 <head>
-    <metacharset
-    ="UTF-8">
+    <meta charset="UTF-8">
     <link th:href="@{/css/list-style.css}" rel="stylesheet"/> <!--plik z ...\resources\static\css\list-style.css -->
     <title>Lista projektów</title>
 </head>
 <body>
 <div class="root">
     <h1>Lista projektów</h1>
-    <p><a th:href="@{/projektEdit}">Dodaj projekt</a></p>
+    <p><a th:href="@{/projectEdit}">Dodaj projekt</a></p>
     <table>
         <thead>
         <tr>
@@ -23,16 +22,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="projekt : ${projekty}">
-            <td th:text="${projekt.projektId}">Id</td>
-            <td th:text="${projekt.nazwa}">Nazwa</td>
-            <td th:text="${projekt.opis}">Opis</td>
-            <td th:text="${#temporals.format(projekt.dataCzasUtworzenia, 'yyyy-MM-dd HH:mm:ss')}">Utworzony</td>
-            <td th:text="${#temporals.format(projekt.dataCzasModyfikacji, 'yyyy-MM-dd HH:mm:ss')}">Zmodyfikowany</td>
-            <td th:text="${#temporals.format(projekt.dataOddania, 'yyyy-MM-dd')}">Data oddania</td>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.projectId}">Id</td>
+            <td th:text="${project.name}">Nazwa</td>
+            <td th:text="${project.description}">Opis</td>
+            <td th:text="${#temporals.format(project.creationDate, 'yyyy-MM-dd HH:mm:ss')}">Utworzony</td>
+<!--            <td th:text="${#temporals.format(projekt., 'yyyy-MM-dd HH:mm:ss')}">Zmodyfikowany</td>-->
+            <td th:text="${#temporals.format(project.returnDate, 'yyyy-MM-dd')}">Data oddania</td>
             <td>
-                <a th:href="@{/projektEdit(projektId=${projekt.projektId})}">Edytuj</a><br>
-                <a th:href="@{/projektEdit(projektId=${projekt.projektId},delete='true')}">Usuń</a></td>
+                <a th:href="@{/projectEdit(projectId=${project.projectId})}">Edytuj</a><br>
+                <a th:href="@{/projectEdit(projectId=${project.projectId},delete='true')}">Usuń</a></td>
         </tr>
         </tbody>
     </table>

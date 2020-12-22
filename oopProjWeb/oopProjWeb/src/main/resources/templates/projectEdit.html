@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/edit-style.css}" rel="stylesheet"/><!--plik z...\resources\static\css\edit-style.css -->
@@ -25,31 +25,31 @@
                 </div>
                 <div th:if="*{projectId}">
                     <label for="projectId" class="lbl">Id:</label>
-                    <input th:field="*{projektId}" class="fld" readonly/>
+                    <input th:field="*{projectId}" class="fld" readonly/>
                 </div>
                 <div>
                     <label for="name" class="lbl">Nazwa:</label>
-                    <input th:field="*{name}" class="fld" th:class="${#fields.hasErrors('opis')}? 'err' : 'fld'"
+                    <input th:field="*{name}" class="fld" th:class="${#fields.hasErrors('description')}? 'err' : 'fld'"
                            size="45"/>
-                    <span class="err" th:if="${#fields.hasErrors('nazwa')}" th:errors="*{nazwa}">Error</span>
+                    <span class="err" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</span>
                 </div>
                 <div>
                     <label for="description" class="lbl">Opis:</label>
-                    <textarea class="fld"rows="3"cols="47"th:field="*{opis}">Opis</textarea>
+                    <textarea class="fld" rows="3"cols="47"th:field="*{description}">Opis</textarea>
                 </div>
                 <div>
                     <label for="return_date" class="lbl">Data oddania:</label>
-                    <input th:field="*{dataOddania}" class="fld" type="text" size="10"/>
+                    <input th:field="*{returnDate}" class="fld" type="text" size="10"/>
                     <i>(RRRR-MM-DD)</i>
                 </div>
-                <div th:if="*{dataCzasUtworzenia}">
+                <div th:if="*{creationDate}">
                     <label for="creation_date" class="lbl">Utworzony:</label>
-                    <input th:field="*{dataCzasUtworzenia}" class="fld" type="text" size="23" readonly/>
+                    <input th:field="*{creationDate}" class="fld" type="text" size="23" readonly/>
                 </div>
-                <div th:if="*{dataCzasModyfikacji}">
-                    <label for="dataCzasModyfikacji" class="lbl">Zmodyfikowany:</label>
-                    <input th:field="*{dataCzasModyfikacji}" class="fld" type="text" size="23" readonly/>
-                </div>
+<!--                <div th:if="*{dataCzasModyfikacji}">-->
+<!--                    <label for="dataCzasModyfikacji" class="lbl">Zmodyfikowany:</label>-->
+<!--                    <input th:field="*{dataCzasModyfikacji}" class="fld" type="text" size="23" readonly/>-->
+<!--                </div>-->
             </div>
         </form>
     </div>
