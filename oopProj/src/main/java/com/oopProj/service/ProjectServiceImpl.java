@@ -32,6 +32,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project setProject(Project project) {
+//        TODO fix creation date is null
+        System.out.println("creation date: " +project.getCreationDate());
         Project saved = new Project(project.getName(),project.getDescription(),project.getCreationDate());
         return projectRepo.save(saved);
     }
