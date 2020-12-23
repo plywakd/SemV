@@ -1,5 +1,6 @@
 package com.pai.STM.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,8 @@ public class Task {
     @Enumerated(value = EnumType.STRING)
     private Status status;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="assigned_account", nullable=false)
+    @JoinColumn(name = "assigned_account", nullable = false)
+    @JsonIgnoreProperties({"tasks"})
     private Account assignedAccount;
 
     public Task(String title, String description, Type type, Status status) {
@@ -33,5 +35,14 @@ public class Task {
         this.addDate = LocalDateTime.now();
         this.type = type;
         this.status = status;
+    }
+
+    public Task(String title, String description, Type type, Status status, Account assignedAccount) {
+        this.title = title;
+        this.description = description;
+        this.addDate = LocalDateTime.now();
+        this.type = type;
+        this.status = status;
+        this.assignedAccount = assignedAccount;
     }
 }
