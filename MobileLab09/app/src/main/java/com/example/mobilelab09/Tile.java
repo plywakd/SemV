@@ -21,10 +21,6 @@ public class Tile {
         this.targetY = targetY;
     }
 
-    public boolean isOnRightPosition() {
-        return (x == targetX && y == targetY);
-    }
-
     public int getX() {
         return x;
     }

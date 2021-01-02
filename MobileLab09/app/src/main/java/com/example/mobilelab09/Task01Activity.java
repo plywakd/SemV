@@ -14,11 +14,26 @@ public class Task01Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String name = getIntent().getStringExtra("name");
+        String level = getIntent().getStringExtra("level");
 
-        myCanvas = new MyCanvas01(this);
+        int tilesForLevel = 9; // default value on easy mode
+
+        switch (level) {
+            case "3x3 - SMALL":
+                tilesForLevel = 9;
+                break;
+            case "4x4 - MEDIUM":
+                tilesForLevel = 16;
+                break;
+            case "5x5 - HARD":
+                tilesForLevel = 25;
+                break;
+        }
+
+        myCanvas = new MyCanvas01(this, name, tilesForLevel);
 
         setContentView(myCanvas);
     }
-
 
 }

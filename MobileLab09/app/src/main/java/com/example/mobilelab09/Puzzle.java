@@ -8,6 +8,9 @@ import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static java.lang.Math.sqrt;
 
 public class Puzzle {
     private int x;
@@ -22,26 +25,29 @@ public class Puzzle {
     private Point blankPoint;
     private int moveCounter;
 
-    public Puzzle(int x, int y, int width, int height) {
+    public Puzzle(int x, int y, int width, int height, int numOfTiles) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.numOfTiles = 9;
-        this.tileSize = (int) ((width / Math.sqrt(numOfTiles)) * 0.9f);
-        this.gapSize = (width - (tileSize * 3)) / 4;
+        this.numOfTiles = numOfTiles;
+        int tilesInRow = (int) sqrt(numOfTiles);
+        this.tileSize = (int) ((width / tilesInRow) * 0.9f);
+        this.gapSize = (int) ((width - (tileSize * tilesInRow)) / (tilesInRow+1));
         this.moveCounter = 0;
         initPuzzle();
         initTiles();
-        this.blankPoint = new Point(x + ((3 * gapSize) + (2 * tileSize)), y + ((3 * gapSize) + (2 * tileSize)));
+        this.blankPoint = new Point(x + ((tilesInRow * gapSize) + ((tilesInRow - 1) * tileSize)),
+                y + ((tilesInRow * gapSize) + (tilesInRow - 1) * tileSize));
+//        randomizeTiles();
     }
 
     public void initPuzzle() {
         places = new ArrayList<>();
         int x1, y1;
-        for (int i = 0; i < Math.sqrt(numOfTiles); i++) {
+        for (int i = 0; i < sqrt(numOfTiles); i++) {
             y1 = x + (i * tileSize) + ((i + 1) * gapSize);
-            for (int j = 0; j < Math.sqrt(numOfTiles); j++) {
+            for (int j = 0; j < sqrt(numOfTiles); j++) {
                 x1 = x + (j * tileSize) + ((j + 1) * gapSize);
                 places.add(new Point(x1, y1));
             }
@@ -103,6 +109,28 @@ public class Puzzle {
             }
         }
         return result;
+    }
+
+    public void randomizeTiles() {
+        Random random = new Random();
+        int blankPosition = random.nextInt(numOfTiles);
+        if (blankPosition != numOfTiles - 1) moveTileToBlank(tiles.get(blankPosition));
+        int s1, s2;
+        for (int i = 0; i < 20; i++) {
+            s1 = random.nextInt(numOfTiles - 1);
+            s2 = random.nextInt(numOfTiles - 1);
+            while (s2 == s1) s2 = random.nextInt(numOfTiles - 1);
+            swapTiles(tiles.get(s1), tiles.get(s2));
+        }
+    }
+
+    public void swapTiles(Tile firstTile, Tile secondTile) {
+        int tempX = firstTile.getX();
+        int tempY = firstTile.getY();
+        firstTile.setX(secondTile.getX());
+        firstTile.setY(secondTile.getY());
+        secondTile.setX(tempX);
+        secondTile.setY(tempY);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
