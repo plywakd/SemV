@@ -33,6 +33,7 @@ public class MyCanvas01 extends View {
     private MediaPlayer actionSound = null;
     private String username;
     private int currentLevel;
+    private boolean gameover = false;
 
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -54,7 +55,7 @@ public class MyCanvas01 extends View {
         time_start = Instant.now();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -77,7 +78,7 @@ public class MyCanvas01 extends View {
     }
 
     public void drawTiles() {
-        paint.setTextSize(400 / (int)Math.sqrt(puzzle.getNumOfTiles()));
+        paint.setTextSize(400 / (int) Math.sqrt(puzzle.getNumOfTiles()));
         for (Tile s : puzzle.getTiles()) canvas.drawRect(s.getRect(), paint);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         for (Tile s : puzzle.getTiles())
@@ -93,13 +94,13 @@ public class MyCanvas01 extends View {
     }
 
     public void saveScore(long seconds, long minutes, int moves) {
-        String score = String.format("Username: %s\tlevel: %d\tmoves:%d, %02d:%02d\n", this.username, this.currentLevel, moves, minutes, seconds);
-        writeToFile(score,c);
+        String score = String.format("Username: %s\tlevel: %d\tmoves: %d, %02d:%02d\n", this.username, this.currentLevel, moves, minutes, seconds);
+        writeToFile(score, c);
     }
 
     private void writeToFile(String data, Context context) {
         String fileName = null;
-        switch(this.currentLevel){
+        switch (this.currentLevel) {
             case 3:
                 fileName = "easyPuzzle.txt";
                 break;
@@ -123,17 +124,20 @@ public class MyCanvas01 extends View {
     public void drawTime() {
         paint.setTextSize(50);
         long seconds = Duration.between(time_start, Instant.now()).getSeconds();
-        String moves = String.format("Player: %s, Time: %02d:%02d",this.username, (seconds / 60), (seconds % 60));
+        String moves = String.format("Player: %s, Time: %02d:%02d", this.username, (seconds / 60), (seconds % 60));
         canvas.drawText(moves, 50, 1500, paint);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void gameDoneAction() {
-        System.out.println("Finished!");
-        long time = Duration.between(time_start, Instant.now()).getSeconds();
-        long minutes = time / 60;
-        long seconds = time % 60;
-        saveScore(seconds, minutes, puzzle.getMoves());
+        if (gameover) {
+            System.exit(0);
+        } else {
+            long time = Duration.between(time_start, Instant.now()).getSeconds();
+            long minutes = time / 60;
+            long seconds = time % 60;
+            saveScore(seconds, minutes, puzzle.getMoves());
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -143,7 +147,8 @@ public class MyCanvas01 extends View {
             puzzle.touchHandler((int) event.getAxisValue(MotionEvent.AXIS_X), (int) event.getAxisValue(MotionEvent.AXIS_Y));
             actionSound = MediaPlayer.create(c, R.raw.quack_sound_effect);
             actionSound.start();
-            if (puzzle.isGameDone()){
+            if (puzzle.isGameDone()) {
+                gameover = true;
                 gameDoneAction();
             }
         }

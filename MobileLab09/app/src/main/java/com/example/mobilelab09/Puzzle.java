@@ -33,7 +33,7 @@ public class Puzzle {
         this.numOfTiles = numOfTiles;
         int tilesInRow = (int) sqrt(numOfTiles);
         this.tileSize = (int) ((width / tilesInRow) * 0.9f);
-        this.gapSize = (int) ((width - (tileSize * tilesInRow)) / (tilesInRow+1));
+        this.gapSize = (int) ((width - (tileSize * tilesInRow)) / (tilesInRow + 1));
         this.moveCounter = 0;
         initPuzzle();
         initTiles();
