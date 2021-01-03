@@ -8,10 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     private TaskRepository taskRepo;
     private ProjectRepository projectRepo;
@@ -29,13 +30,14 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task setTask(Task task) {
-        Task saved = task;
+        Task saved = new Task(task.getProject(), task.getName(), task.getTaskOrder(), task.getDescription());
         return taskRepo.save(saved);
     }
 
     @Override
+    @Transactional
     public void deleteTask(Integer taskId) {
-
+        taskRepo.deleteById(taskId);
     }
 
     @Override

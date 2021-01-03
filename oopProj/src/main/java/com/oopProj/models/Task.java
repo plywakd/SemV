@@ -28,6 +28,14 @@ public class Task {
     @Column(name = "datetime_add", nullable = false)
     private LocalDateTime addedDate;
 
+    public Task(Project project, String name, Integer taskOrder, String description) {
+        this.project = project;
+        this.name = name;
+        this.taskOrder = taskOrder;
+        this.description = description;
+        this.addedDate = LocalDateTime.now();
+    }
+
     public Integer getTaskId() {
         return taskId;
     }

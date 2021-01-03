@@ -29,6 +29,14 @@ public class Student {
     @ManyToMany(mappedBy = "students")
     private Set<Project> projects;
 
+    public Student(String name, String surname, String indexNum, String email, boolean landline) {
+        this.name = name;
+        this.surname = surname;
+        this.indexNum = indexNum;
+        this.email = email;
+        this.landline = landline;
+    }
+
     public Integer getStudentId() {
         return studentId;
     }
