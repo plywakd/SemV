@@ -39,7 +39,7 @@ public class Puzzle {
         initTiles();
         this.blankPoint = new Point(x + ((tilesInRow * gapSize) + ((tilesInRow - 1) * tileSize)),
                 y + ((tilesInRow * gapSize) + (tilesInRow - 1) * tileSize));
-//        randomizeTiles();
+        randomizeTiles();
     }
 
     public void initPuzzle() {

@@ -51,7 +51,8 @@ public class MyCanvas01 extends View {
         height = getScreenHeight();
         this.username = name;
         this.currentLevel = (int) Math.sqrt(level);
-        puzzle = new Puzzle((int) (width * 0.05f), (int) (width * 0.05f), (int) (width * 0.9f), (int) (width * 0.9f), level);
+        puzzle = new Puzzle((int) (width * 0.05f), (int) (width * 0.05f),
+                (int) (width * 0.9f), (int) (width * 0.9f), level);
         time_start = Instant.now();
     }
 
@@ -94,7 +95,8 @@ public class MyCanvas01 extends View {
     }
 
     public void saveScore(long seconds, long minutes, int moves) {
-        String score = String.format("Username: %s\tlevel: %d\tmoves: %d, %02d:%02d\n", this.username, this.currentLevel, moves, minutes, seconds);
+        String score = String.format("Username: %s\tlevel: %d\tmoves: %d, %02d:%02d\n",
+                this.username, this.currentLevel, moves, minutes, seconds);
         writeToFile(score, c);
     }
 
