@@ -1,6 +1,6 @@
 package com.oopProjWeb.service;
 
-import com.oopProjWeb.model.Task;
+import com.oopProjWeb.model.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,50 +16,50 @@ import java.net.URI;
 import java.util.Optional;
 
 @Service
-public class TaskServiceImpl implements TaskService {
+public class StudentServiceImpl implements StudentService{
     private static final Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
     @Value("${rest.server.url}")
     private String serverUrl;
 
-    private final static String RESOURCE_PATH = "api/tasks";
+    private final static String RESOURCE_PATH = "api/students";
 
     private RestTemplate restTemplate;
 
     @Autowired
-    public TaskServiceImpl(RestTemplate restTemplate) {
+    public StudentServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @Override
-    public Optional<Task> getTask(Integer taskId) {
-        URI url = ServiceUtil.getUriComponent(serverUrl, getResourcePath(taskId))
+    public Optional<Student> getStudent(Integer studentId) {
+        URI url = ServiceUtil.getUriComponent(serverUrl, getResourcePath(studentId))
                 .build()
                 .toUri();
         logger.info("REQUEST -> GET {}", url);
-        return Optional.ofNullable(restTemplate.getForObject(url, Task.class));
+        return Optional.ofNullable(restTemplate.getForObject(url, Student.class));
     }
 
     @Override
-    public Task setTask(Task task) {
-        if (task.getTaskId() != null) {
-            String url = getUriStringComponent(task.getTaskId());
+    public Student setStudent(Student student) {
+        if (student.getStudentId() != null) {
+            String url = getUriStringComponent(student.getStudentId());
             logger.info("REQUEST -> PUT {}", url);
-            restTemplate.put(url, task);
-            return task;
+            restTemplate.put(url, student);
+            return student;
         } else {
-            HttpEntity<Task> request = new HttpEntity<>(task);
+            HttpEntity<Student> request = new HttpEntity<>(student);
             String url = getUriStringComponent();
             logger.info("REQUEST -> POST {}", url);
             URI location = restTemplate.postForLocation(url, request);
             logger.info("REQUEST(location)-> GET{}", location);
-            return restTemplate.getForObject(location, Task.class);
+            return restTemplate.getForObject(location, Student.class);
         }
     }
 
     @Override
-    public void deleteTask(Integer taskId) {
-        URI url = ServiceUtil.getUriComponent(serverUrl, getResourcePath(taskId))
+    public void deleteStudent(Integer studentId) {
+        URI url = ServiceUtil.getUriComponent(serverUrl, getResourcePath(studentId))
                 .build()
                 .toUri();
         logger.info("REQUEST -> DELETE {}", url);
@@ -67,14 +67,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Page<Task> getTasks(Pageable pageable) {
+    public Page<Student> getStudents(Pageable pageable) {
         URI url = ServiceUtil.getURI(serverUrl, getResourcePath(), pageable);
         logger.info("REQUEST -> GET {}", url);
         return getPage(url, restTemplate);
     }
 
-    private RestResponsePage<Task> getPage(URI uri, RestTemplate restTemplate) {
-        return ServiceUtil.getPage(uri, restTemplate, new ParameterizedTypeReference<RestResponsePage<Task>>() {
+    private RestResponsePage<Student> getPage(URI uri, RestTemplate restTemplate) {
+        return ServiceUtil.getPage(uri, restTemplate, new ParameterizedTypeReference<RestResponsePage<Student>>() {
         });
     }
 
@@ -93,5 +93,4 @@ public class TaskServiceImpl implements TaskService {
     private String getUriStringComponent(Integer id) {
         return serverUrl + getResourcePath(id);
     }
-
 }

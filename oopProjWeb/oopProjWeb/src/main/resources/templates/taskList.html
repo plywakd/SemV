@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/list-style.css}" rel="stylesheet"/> <!--plik z ...\resources\static\css\list-style.css -->
+    <title>Lista zadan</title>
+</head>
+<body>
+<div class="root">
+    <h1>Lista zadan</h1>
+    <p><a th:href="@{/taskEdit}">Dodaj zadanie</a></p>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Projekt</th>
+            <th>Nazwa</th>
+            <th>Kolejnosc</th>
+            <th>Opis</th>
+            <th>Data dodania</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.taskId}">Id</td>
+            <td th:text="${task.project}">Projekt</td>
+            <td th:text="${task.name}">Nazwa</td>
+            <td th:text="${task.taskOrder}">Kolejnosc</td>
+            <td th:text="${task.description}">Opis</td>
+            <td th:text="${#temporals.format(task.addedDate, 'yyyy-MM-dd HH:mm:ss')}">Utworzony</td>
+            <td>
+                <a th:href="@{/taskEdit(taskId=${task.taskId})}">Edytuj</a><br>
+                <a th:href="@{/taskEdit(taskId=${task.taskId},delete='true')}">Usuń</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

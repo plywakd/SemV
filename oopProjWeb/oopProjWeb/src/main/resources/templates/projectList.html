@@ -16,9 +16,8 @@
             <th>Nazwa</th>
             <th>Opis</th>
             <th>Utworzony</th>
-            <th>Zmodyfikowany</th>
             <th>Data oddania</th>
-            <th>Edit</th>
+            <th>Edytuj</th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +26,6 @@
             <td th:text="${project.name}">Nazwa</td>
             <td th:text="${project.description}">Opis</td>
             <td th:text="${#temporals.format(project.creationDate, 'yyyy-MM-dd HH:mm:ss')}">Utworzony</td>
-<!--            <td th:text="${#temporals.format(projekt., 'yyyy-MM-dd HH:mm:ss')}">Zmodyfikowany</td>-->
             <td th:text="${#temporals.format(project.returnDate, 'yyyy-MM-dd')}">Data oddania</td>
             <td>
                 <a th:href="@{/projectEdit(projectId=${project.projectId})}">Edytuj</a><br>

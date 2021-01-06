@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/list-style.css}" rel="stylesheet"/> <!--plik z ...\resources\static\css\list-style.css -->
+    <title>Lista studentow</title>
+</head>
+<body>
+<div class="root">
+    <h1>Lista studentow</h1>
+    <p><a th:href="@{/studentEdit}">Dodaj studenta</a></p>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Numer Indeksu</th>
+            <th>Email</th>
+            <th>Telefon stacjonarny</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.studentId}">Id</td>
+            <td th:text="${student.name}">Imie</td>
+            <td th:text="${student.surname}">Nazwisko</td>
+            <td th:text="${student.indexNum}">Numer Indeksu</td>
+            <td th:text="${student.email}">Email</td>
+            <td th:text="${student.landline}">Telefon stacjonarny</td>
+            <td>
+                <a th:href="@{/studentEdit(studentId=${student.studentId})}">Edytuj</a><br>
+                <a th:href="@{/studentEdit(studentId=${student.studentId},delete='true')}">Usuń</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
