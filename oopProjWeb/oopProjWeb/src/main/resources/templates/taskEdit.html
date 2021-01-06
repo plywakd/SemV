@@ -23,16 +23,16 @@
                 <input class="btn" type="submit" name="create" value="create" th:name="${akcja}" th:value="${opis}"/>
                 <input class="btn" type="submit" name="cancel" value="Anuluj"/>
             </div>
-            <div th:if="*{taskID}">
+            <div th:if="*{taskId}">
                 <label for="taskId" class="lbl">Id:</label>
                 <input th:field="*{taskId}" class="fld" readonly/>
             </div>
-            <div>
-                <label for="project" class="lbl">Projekty:</label>
-                <input th:field="*{project}" class="fld" th:class="${#fields.hasErrors('project')}? 'err' : 'fld'"
-                       size="45"/>
-                <span class="err" th:if="${#fields.hasErrors('project')}" th:errors="*{name}">Error</span>
-            </div>
+<!--            <div>-->
+<!--                <label for="project" class="lbl">Projekty:</label>-->
+<!--                <input th:field="*{project}" class="fld" th:class="${#fields.hasErrors('project')}? 'err' : 'fld'"-->
+<!--                       size="45"/>-->
+<!--                <span class="err" th:if="${#fields.hasErrors('project')}" th:errors="*{name}">Error</span>-->
+<!--            </div>-->
             <div>
                 <label for="name" class="lbl">Nazwa:</label>
                 <input th:field="*{name}" class="fld" th:class="${#fields.hasErrors('name')}? 'err' : 'fld'"
