@@ -31,8 +31,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project setProject(Project project) {
-        Project saved = new Project(project.getName(), project.getDescription(), project.getReturnDate());
-        return projectRepo.save(saved);
+        Project projectToSave = null;
+        if (project.getProjectId() != null) {
+            projectToSave = project;
+        } else {
+            projectToSave = new Project(project.getName(), project.getDescription(), project.getReturnDate());
+        }
+        return projectRepo.save(projectToSave);
     }
 
     @Override

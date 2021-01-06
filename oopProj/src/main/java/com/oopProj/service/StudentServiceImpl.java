@@ -26,7 +26,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student setStudent(Student student) {
-        Student studentToSave = new Student(student.getName(), student.getSurname(), student.getIndexNum(), student.getEmail(), student.isLandline());
+        Student studentToSave = null;
+        if (student.getStudentId() != null) {
+            studentToSave = student;
+        } else {
+            studentToSave = new Student(student.getName(), student.getSurname(), student.getIndexNum(), student.getEmail(), student.isLandline());
+        }
         return studentRepo.save(studentToSave);
     }
 

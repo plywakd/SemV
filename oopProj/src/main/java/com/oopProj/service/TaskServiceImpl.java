@@ -30,8 +30,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task setTask(Task task) {
-        Task saved = new Task(task.getProject(), task.getName(), task.getTaskOrder(), task.getDescription());
-        return taskRepo.save(saved);
+        Task taskToSave = null;
+        if (task.getTaskId() != null) {
+            taskToSave = task;
+        } else {
+            taskToSave = new Task(task.getProject(), task.getName(), task.getTaskOrder(), task.getDescription());
+        }
+        return taskRepo.save(taskToSave);
     }
 
     @Override
