@@ -30,6 +30,11 @@ public class ProjectController {
         this.taskService = taskService;
     }
 
+    @GetMapping("/")
+    public String mainMenu(){
+        return "mainmenu";
+    }
+
     @GetMapping("/projectList")
     public String projectList(Model model, Pageable pageable) {
         model.addAttribute("projects", projectService.getProjects(pageable).getContent());
