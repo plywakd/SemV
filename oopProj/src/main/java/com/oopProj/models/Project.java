@@ -48,11 +48,11 @@ public class Project {
         this.returnDate = returnDate;
     }
 
-    public Project(String name, String description, LocalDateTime creationDate) {
+    public Project(String name, String description, LocalDate returnDate) {
         this.name = name;
         this.description = description;
-        this.creationDate = creationDate;
-        this.returnDate = LocalDate.now();
+        this.creationDate = LocalDateTime.now();
+        this.returnDate = returnDate;
     }
 
     public Integer getProjectId() {

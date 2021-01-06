@@ -1,5 +1,6 @@
 package com.oopProj.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
     private Integer taskId;
+    @JsonIgnoreProperties("tasks")
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
