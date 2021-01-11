@@ -108,14 +108,14 @@ public class Main {
                     long timeElapsed = Duration.between(start, finish).getSeconds();
                     System.out.println("FOUND HREF: " + foundLink + " LEVELS : " + rxLevels + " TIME TAKEN : " + timeElapsed + "s");
                 });
-        result.filter(b->!b).subscribeOn(Schedulers.computation()).subscribe(b->{
+        result.filter(b -> !b).subscribeOn(Schedulers.computation()).subscribe(b -> {
             List<Observable<Set<String>>> subHrefsObservers = hrefs.stream()
                     .map(s -> Observable.just(getHrefs(wikiHeader + s))
                             .subscribeOn(Schedulers.computation()))
                     .collect(Collectors.toList());
             Observable.zip(subHrefsObservers, objects -> Arrays.stream(objects)
                     .collect(Collectors.toList())).map(res -> res.stream()
-                    .map(s -> (Set<String>)s)
+                    .map(s -> (Set<String>) s)
                     .reduce((s1, s2) -> {
                         Set<String> newSet = new HashSet<>();
                         newSet.addAll(s1);
