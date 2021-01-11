@@ -1,15 +1,15 @@
 
 
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -83,8 +83,29 @@ public class Main {
                             .collect(Collectors.toList()));
 
             subHrefsResults.get().stream()
-                    .filter(s-> !s.isEmpty() && !s.contains(".") && !s.contains(":") && !s.contains("&"))
-                    .forEach(s->subHrefs.addAll(s));
+                    .filter(s -> !s.isEmpty() && !s.contains(".") && !s.contains(":") && !s.contains("&"))
+                    .forEach(s -> subHrefs.addAll(s));
+        }
+    }
+
+    public static void lookHrefRX(Set<String> hrefs) throws Exception {
+        List<Observable<Boolean>> observers = hrefs.stream()
+                .map(h -> Observable.fromCallable(
+                        () -> (h).equals(wikiHrefToFind)))
+                .collect(Collectors.toList());
+        Observable<Boolean> result = Observable.zip(observers, objects -> Arrays.stream(objects)
+                .collect(Collectors.toList()))
+                .flatMap(res -> Observable.just(res.stream()
+                        .anyMatch(b -> (boolean) b)));
+        result.filter(b->b)
+                .subscribeOn(Schedulers.computation())
+                .subscribe(b->foundLink="found");
+        if(!foundLink.equals("")){
+            List<Observable<Set<String>>> subHrefsObservers = hrefs.stream()
+                    .map(s-> Observable.just(getHrefs(wikiHeader+s))
+                            .subscribeOn(Schedulers.computation()))
+                    .collect(Collectors.toList());
+
         }
     }
 

@@ -22,11 +22,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1889ef0-8d0b-4c9a-bf4b-0861ea5ea809" name="Default Changelist" comment="Lab04/05 Parallel list to set change with time measurement">
-      <change beforePath="$PROJECT_DIR$/../Lab01Parallel/out/production/Lab01Parallel/com/company/Threader.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab01Parallel/out/production/Lab01Parallel/com/company/Threader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab02Parallel/out/production/Lab02Parallel/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab02Parallel/out/production/Lab02Parallel/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab03Parallel/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab03Parallel/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+    <list default="true" id="c1889ef0-8d0b-4c9a-bf4b-0861ea5ea809" name="Default Changelist" comment="Lab04/05 Parallel minor comments update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +49,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Lab05Parallel" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -117,7 +114,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606753371931</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Lab04/05 Parallel minor comments update">
+      <created>1610387032938</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1610387032938</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,52 +140,7 @@
     <MESSAGE value="Lab04Parallel wiki parser on while loop" />
     <MESSAGE value="Lab04/05 Parallel upgraded link searcher" />
     <MESSAGE value="Lab04/05 Parallel list to set change with time measurement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab04/05 Parallel list to set change with time measurement" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="320" y="79" key="#Project_Structure" timestamp="1605539848803">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="320" y="79" key="#Project_Structure/0.0.1680.1010@0.0.1680.1010" timestamp="1605539848803" />
-    <state x="294" y="160" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605540463299">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="294" y="160" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1605540463299" />
-    <state x="569" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1605540462325">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="569" y="307" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1605540462325" />
-    <state x="620" y="260" key="FileChooserDialogImpl" timestamp="1606751599867">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="620" y="260" key="FileChooserDialogImpl/0.0.1680.1010@0.0.1680.1010" timestamp="1606751599867" />
-    <state width="1637" height="273" key="GridCell.Tab.0.bottom" timestamp="1606753623565">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state width="1637" height="273" key="GridCell.Tab.0.bottom/0.0.1680.1010@0.0.1680.1010" timestamp="1606753623565" />
-    <state width="1637" height="273" key="GridCell.Tab.0.center" timestamp="1606753623565">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state width="1637" height="273" key="GridCell.Tab.0.center/0.0.1680.1010@0.0.1680.1010" timestamp="1606753623565" />
-    <state width="1637" height="273" key="GridCell.Tab.0.left" timestamp="1606753623565">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state width="1637" height="273" key="GridCell.Tab.0.left/0.0.1680.1010@0.0.1680.1010" timestamp="1606753623565" />
-    <state width="1637" height="273" key="GridCell.Tab.0.right" timestamp="1606753623565">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state width="1637" height="273" key="GridCell.Tab.0.right/0.0.1680.1010@0.0.1680.1010" timestamp="1606753623565" />
-    <state x="432" y="238" key="Vcs.Push.Dialog.v2" timestamp="1606753615002">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="432" y="238" key="Vcs.Push.Dialog.v2/0.0.1680.1010@0.0.1680.1010" timestamp="1606753615002" />
-    <state x="656" y="283" key="chooseDestDirectoryDialog" timestamp="1605540356003">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="656" y="283" key="chooseDestDirectoryDialog/0.0.1680.1010@0.0.1680.1010" timestamp="1605540356003" />
-    <state x="431" y="125" key="new project wizard" timestamp="1606751648246">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="431" y="125" key="new project wizard/0.0.1680.1010@0.0.1680.1010" timestamp="1606751648246" />
+    <MESSAGE value="Lab04/05 Parallel minor comments update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab04/05 Parallel minor comments update" />
   </component>
 </project>
