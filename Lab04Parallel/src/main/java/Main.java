@@ -15,7 +15,7 @@ public class Main {
 
     public static String randomWikipedia = "https://en.wikipedia.org/wiki/Special:Random";
     public static String toFindWikipedia = "https://en.wikipedia.org/wiki/Poland";
-    //\/wiki\/(.*\w)
+    //regex maybe needed later ? \/wiki\/(.*\w)
     public static String wikiHrefToFind = "/Andrzej";
     public static String httpHeader = "https://en.wikipedia.org/wiki";
     public static String foundLink = "";
