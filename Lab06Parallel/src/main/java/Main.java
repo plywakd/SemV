@@ -25,6 +25,8 @@ public class Main {
     public static String foundLink = "";
     public static Set<String> newHrefs;
     public static Set<String> subHrefs = new HashSet<>();
+    public static int rxLevels = 0;
+    public static Instant start;
 
     public static String getHTML(String urlToRead) {
         StringBuilder result = new StringBuilder();
@@ -88,7 +90,8 @@ public class Main {
         }
     }
 
-    public static void lookHrefRX(Set<String> hrefs) throws Exception {
+    public static void lookHrefRX(Set<String> hrefs) {
+        rxLevels++;
         List<Observable<Boolean>> observers = hrefs.stream()
                 .map(h -> Observable.fromCallable(
                         () -> (h).equals(wikiHrefToFind)))
@@ -97,34 +100,50 @@ public class Main {
                 .collect(Collectors.toList()))
                 .flatMap(res -> Observable.just(res.stream()
                         .anyMatch(b -> (boolean) b)));
-        result.filter(b->b)
+        result.filter(b -> b)
                 .subscribeOn(Schedulers.computation())
-                .subscribe(b->foundLink="found");
-        if(!foundLink.equals("")){
+                .subscribe(b -> {
+                    foundLink = "found";
+                    Instant finish = Instant.now();
+                    long timeElapsed = Duration.between(start, finish).getSeconds();
+                    System.out.println("FOUND HREF: " + foundLink + " LEVELS : " + rxLevels + " TIME TAKEN : " + timeElapsed + "s");
+                });
+        result.filter(b->!b).subscribeOn(Schedulers.computation()).subscribe(b->{
             List<Observable<Set<String>>> subHrefsObservers = hrefs.stream()
-                    .map(s-> Observable.just(getHrefs(wikiHeader+s))
+                    .map(s -> Observable.just(getHrefs(wikiHeader + s))
                             .subscribeOn(Schedulers.computation()))
                     .collect(Collectors.toList());
-
-        }
+            Observable.zip(subHrefsObservers, objects -> Arrays.stream(objects)
+                    .collect(Collectors.toList())).map(res -> res.stream()
+                    .map(s -> (Set<String>)s)
+                    .reduce((s1, s2) -> {
+                        Set<String> newSet = new HashSet<>();
+                        newSet.addAll(s1);
+                        newSet.addAll(s2);
+                        return newSet;
+                    })).subscribe(s -> s.ifPresent(s2 -> lookHrefRX(s2)));
+        });
     }
 
     public static void main(String[] args) throws Exception {
-        int levels = 0;
-        Instant start = Instant.now();
+//        int levels = 0;
+        start = Instant.now();
         Set<String> hrefs = getHrefs(randomWikipedia);
+        lookHrefRX(hrefs);
 //        System.out.println("Links on wiki " + hrefs.toString());
-        foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
+//        foundLink = hrefs.stream().filter(link -> link.equals(wikiHrefToFind)).findFirst().orElse("");
         while (foundLink.equals("")) {
-            System.out.println("LEVEL: " + levels);
-            lookHref(hrefs);
-            levels++;
-            hrefs = new HashSet<>(subHrefs);
+//            System.out.println("LEVEL: " + levels);
+//            lookHref(hrefs);
+//            levels++;
+//            hrefs = new HashSet<>(subHrefs);
         }
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).getSeconds();
-        System.out.println("FOUND HREF: " + foundLink + " LEVELS : " + levels + " TIME TAKEN : " + timeElapsed + "s");
+//        Instant finish = Instant.now();
+//        long timeElapsed = Duration.between(start, finish).getSeconds();
+//        System.out.println("FOUND HREF: " + foundLink + " LEVELS : " + levels + " TIME TAKEN : " + timeElapsed + "s");
 
 
     }
+
+
 }
