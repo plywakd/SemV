@@ -15,8 +15,9 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/users**").hasAnyAuthority("TU WPISZ ROLE")
-                .antMatchers("/users/**").hasAnyAuthority("TU WPISZ ROLE, ROLE")
+                .antMatchers("/").hasAnyAuthority("user")
+                .antMatchers("/users**").hasAnyAuthority("admin")
+                .antMatchers("/users/**").hasAnyAuthority("admin", "user")
                 .anyRequest().permitAll()
                 .and().csrf().disable()
                 .formLogin()
@@ -30,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
+
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .usersByUsernameQuery("SELECT acc.email,acc.password,acc.status FROM accounts acc WHERE acc.email=?")

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1> Login to website:</h1>
+<h1> Login to website:</h1>
 
-    <form th:action="@{/login_process}" th:method="post">
-        <input th:type="email" th:plceholder="please sign your emial" th:name="email">
-        <input th:type="password" th:plceholder="please input your password" th:name="password">
-    </form>
+<form th:action="@{/login_process}" th:method="post">
+    <input th:type="email" th:plceholder="please sign your emial" th:name="email">
+    <input th:type="password" th:plceholder="please input your password" th:name="password">
+</form>
 </body>
 </html>
