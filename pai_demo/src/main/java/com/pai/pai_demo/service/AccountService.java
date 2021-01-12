@@ -6,6 +6,7 @@ import com.pai.pai_demo.repository.AccountRepository;
 import com.pai.pai_demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class AccountService {
         Optional<Role> defaultRoleOpt = roleRepository.findFirstByRoleName("user");
         if (defaultRoleOpt.isPresent()){
             Role defaultRole = defaultRoleOpt.get();
+            account.setPassword(new BCryptPasswordEncoder().encode(account.getPassword()));
             account.setRoles(new HashSet<>(Arrays.asList(defaultRole)));
             return accountRepository.save(account);
         }
