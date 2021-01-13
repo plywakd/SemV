@@ -129,7 +129,9 @@ public class Main {
 //        TODO can be accessed via opening stream without loading whole file to data tab
 //        FileChannel ch = fileOutput.getChannel();
         if (data[22] == 1) {
+
             data[22] = 2;
+
             int newByteRate = bytesToInt(data, 28, 32) * data[22];
             int newBlockAlign = bytesToInt(data, 32, 34) * data[22];
             data[31] = (byte) (newByteRate >>> 24);
@@ -137,7 +139,22 @@ public class Main {
             data[29] = (byte) (newByteRate >>> 8);
             data[28] = (byte) newByteRate;
             data[32] = (byte) newBlockAlign;
-            System.out.println("Num channels: "+data[22]+" Check byteRate function: " + bytesToInt(data,28,32) + " , " + newBlockAlign);
+            System.out.println("Num channels: "+data[22]+" Check byteRate function: " +
+                    bytesToInt(data,28,32) + " , " + newBlockAlign);
+
+            int newChunkSize = bytesToInt(data, 4,8)* data[22];
+            int newSubChunkSize2 = bytesToInt(data, 40,44) * data[22];
+            data[7] = (byte) (newChunkSize >>> 24);
+            data[6] = (byte) (newChunkSize >>> 16);
+            data[5] = (byte) (newChunkSize >>> 8);
+            data[4] = (byte) newChunkSize;
+
+
+            data[43] = (byte) (newSubChunkSize2 >>> 24);
+            data[42] = (byte) (newSubChunkSize2 >>> 16);
+            data[41] = (byte) (newSubChunkSize2 >>> 8);
+            data[40] = (byte) newSubChunkSize2;
+            System.out.println("New chunk size: "+ newChunkSize + "new subchunk 2 : "+newSubChunkSize2);
 //            ch.write(ByteBuffer.wrap(data));
             byte[] monoData = Arrays.copyOfRange(data, 44, Math.toIntExact(fileSize));
             byte[] stereoData = new byte[monoData.length * 2];
@@ -150,7 +167,6 @@ public class Main {
                 stereoData[i + 2] = stereoData[i];
                 stereoData[i + 3] = stereoData[i + 1];
             }
-            System.out.println(stereoData.length+","+monoToStereo.length);
             System.arraycopy(stereoData, 0, monoToStereo, 44, stereoData.length);
             fileOutput.write(monoToStereo);
             System.out.println("New stereo file saved!");
