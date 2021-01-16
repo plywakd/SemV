@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class FrontendController {
-    @GetMapping("/")
+    @GetMapping("/xd")
     public String home(Authentication auth) {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         System.out.println("credentials: " + userDetails);
