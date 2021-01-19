@@ -29,7 +29,10 @@ public class StudentRestController {
     @PostMapping(path = "/students")
     ResponseEntity<Void> createStudent(@Valid @RequestBody Student student) {
         Student createdStudent = studentService.setStudent(student);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{studentId}").buildAndExpand(createdStudent.getStudentId()).toUri();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{studentId}")
+                .buildAndExpand(createdStudent.getStudentId())
+                .toUri();
         return ResponseEntity.created(location).build();
     }
 

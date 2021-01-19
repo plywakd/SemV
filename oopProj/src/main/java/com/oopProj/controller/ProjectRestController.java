@@ -34,7 +34,11 @@ public class ProjectRestController {
     @PostMapping(path = "/projects")
     ResponseEntity<Void> createProject(@Valid @RequestBody Project project) {
         Project createdProject = projectService.setProject(project);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{projectId}").buildAndExpand(createdProject.getProjectId()).toUri();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{projectId}")
+                .buildAndExpand(createdProject.getProjectId())
+                .toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -61,7 +65,7 @@ public class ProjectRestController {
 
     @GetMapping(value = "/projects_list")
     List<Project> getProjects() {
-        return projectService.getProjects(PageRequest.of(0,20)).getContent();
+        return projectService.getProjects(PageRequest.of(0, 20)).getContent();
     }
 
     @GetMapping(value = "/projects", params = "name")

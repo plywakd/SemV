@@ -71,6 +71,7 @@ public class Project {
     }
 
     public String projectRepr() {
-        return "Project "+ name + "\n details: " + description + "\n created on: " + creationDate + "\n returned on: " + returnDate;
+        return "Project " + name + "\n details: " + description + "\n created on: " +
+                creationDate + "\n returned on: " + returnDate;
     }
 }

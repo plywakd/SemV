@@ -1,6 +1,5 @@
 package com.oopProj.service;
 
-import com.oopProj.models.Project;
 import com.oopProj.models.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -29,7 +29,11 @@ public class TaskRestController {
     @PostMapping(path = "/tasks")
     ResponseEntity<Void> createTask(@Valid @RequestBody Task task) {
         Task createdTask = taskService.setTask(task);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{taskId}").buildAndExpand(createdTask.getTaskId()).toUri();
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{taskId}")
+                .buildAndExpand(createdTask.getTaskId())
+                .toUri();
         return ResponseEntity.created(location).build();
     }
 
