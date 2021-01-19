@@ -160,8 +160,8 @@ public class ProjectController {
     }
 
     @PostMapping(params = "delete", path = "/taskEdit")
-    public String taskEditDelete(@ModelAttribute Project project) {
-        projectService.deleteProject(project.getProjectId());
+    public String taskEditDelete(@ModelAttribute Task task) {
+        taskService.deleteTask(task.getTaskId());
         return "redirect:/taskList";
     }
 }
