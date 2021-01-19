@@ -28,7 +28,7 @@
                 <input th:field="*{taskId}" class="fld" readonly/>
             </div>
             <div>
-                <label for="projectId" class="lbl">Projekty:</label>
+                <label for="projectId" class="lbl">Przypisane id projektu:</label>
                 <input th:field="*{project.projectId}" class="fld" th:class="${#fields.hasErrors('project')}? 'err' : 'fld'"
                        size="45"/>
                 <span class="err" th:if="${#fields.hasErrors('project')}" th:errors="*{name}">Error</span>
