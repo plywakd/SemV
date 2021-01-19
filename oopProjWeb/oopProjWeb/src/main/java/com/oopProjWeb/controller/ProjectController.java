@@ -130,7 +130,8 @@ public class ProjectController {
     @GetMapping("/taskEdit")
     public String taskEdit(@RequestParam(required = false) Integer taskId, Model model) {
         if (taskId != null) {
-            model.addAttribute("task", taskService.getTask(taskId).get());
+            Task task = taskService.getTask(taskId).get();
+            model.addAttribute("task", task);
         } else {
             Task task = new Task();
             model.addAttribute("task", task);

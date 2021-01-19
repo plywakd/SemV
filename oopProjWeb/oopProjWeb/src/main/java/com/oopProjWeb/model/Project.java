@@ -94,4 +94,8 @@ public class Project {
                 ", students=" + students +
                 '}';
     }
+
+    public String projectRepr() {
+        return "Project "+ name + "\n details: " + description + "\n created on: " + creationDate + "\n returned on: " + returnDate;
+    }
 }

@@ -90,7 +90,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "taskId=" + taskId +
-                ", project=" + project +
+                ", project=" + project.projectRepr() +
                 ", name='" + name + '\'' +
                 ", taskOrder=" + taskOrder +
                 ", description='" + description + '\'' +

@@ -24,7 +24,7 @@
         <tbody>
         <tr th:each="task : ${tasks}">
             <td th:text="${task.taskId}">Id</td>
-            <td th:text="${task.project}">Projekt</td>
+            <td th:text="${task.project.projectRepr()}">Projekt</td>
             <td th:text="${task.name}">Nazwa</td>
             <td th:text="${task.taskOrder}">Kolejnosc</td>
             <td th:text="${task.description}">Opis</td>
