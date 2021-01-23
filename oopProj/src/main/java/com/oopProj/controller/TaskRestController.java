@@ -1,6 +1,8 @@
 package com.oopProj.controller;
 
+import com.oopProj.models.Project;
 import com.oopProj.models.Task;
+import com.oopProj.service.ProjectService;
 import com.oopProj.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,20 +16,36 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api")
 public class TaskRestController {
 
     private TaskService taskService;
+    private ProjectService projectService;
 
     @Autowired
-    public TaskRestController(TaskService taskService) {
+    public TaskRestController(TaskService taskService, ProjectService projectService) {
         this.taskService = taskService;
+        this.projectService = projectService;
     }
 
     @PostMapping(path = "/tasks")
     ResponseEntity<Void> createTask(@Valid @RequestBody Task task) {
+        Task createdTask = taskService.setTask(task);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{taskId}")
+                .buildAndExpand(createdTask.getTaskId())
+                .toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping(path = "/tasks/{projectId}")
+    ResponseEntity<Void> createTask(@Valid @RequestBody Task task, @PathVariable Integer projectId) {
+        Optional<Project> foundProject = projectService.getProject(projectId);
+        task.setProject(foundProject.get());
         Task createdTask = taskService.setTask(task);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
