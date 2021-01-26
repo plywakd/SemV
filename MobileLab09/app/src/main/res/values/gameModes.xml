@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="gameModes">
-        <item>3x3 - SMALL</item>
-        <item>4x4 - MEDIUM</item>
-        <item>5x5 - HARD</item>
-    </string-array>
-</resources>
