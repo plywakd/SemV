@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="180cbc4d-faad-4597-a95b-d5600c844752" name="Default Changelist" comment="" />
+    <list default="true" id="180cbc4d-faad-4597-a95b-d5600c844752" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/SemV.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/StmApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/controller/MainController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/model/Account.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/model/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/model/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/model/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/repository/AccountRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/repository/TaskRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/service/AccountService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/java/com/pai/STM/service/TaskService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/resources/DDL.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/resources/DDLsql.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/resources/ERD.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STM/src/test/java/com/pai/STM/StmApplicationTests.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,7 +51,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pai/PaiLecture/STM" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="180cbc4d-faad-4597-a95b-d5600c844752" name="Default Changelist" comment="" />
@@ -34,15 +64,5 @@
       <updated>1603724885188</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="619" y="246" key="FileChooserDialogImpl" timestamp="1603724908104">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="619" y="246" key="FileChooserDialogImpl/0.0.1680.1010@0.0.1680.1010" timestamp="1603724908104" />
-    <state x="222" y="125" key="new project wizard" timestamp="1603724911466">
-      <screen x="0" y="0" width="1680" height="1010" />
-    </state>
-    <state x="222" y="125" key="new project wizard/0.0.1680.1010@0.0.1680.1010" timestamp="1603724911466" />
   </component>
 </project>
